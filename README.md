@@ -123,42 +123,17 @@ Over the course of two intensive weeks, I progressed from foundational Python pr
 ## 🏗️ Repository Structure
 
 ```text
-📦 Internship at BlueStock
-┣ 📂 Hashmil_Submission
-┃ ┣ 📂 Source Code
-┃ ┣ 📂 Datasets
-┃ ┣ 📂 Documentation
-┃ ┣ 📂 PPT,Slides
-┃ ┗ 📂 Demo Video
-┃
-┣ 📂 bluestock_mf_capstone
-┃ ┣ 📂 data
-┃ ┣ 📂 notebooks
-┃ ┣ 📂 scripts
-┃ ┣ 📂 sql
-┃ ┣ 📂 dashboard
-┃ ┣ 📂 reports
-┃ ┣ 📜 run_pipeline.py
-┃ ┣ 📜 README.md
-┃ ┗ 📜 Bluestock_MF_Presentation.pptx
-┃
-┣ 📂 learning-journey-week1
-┃ ┣ 📜 Day1.png
-┃ ┣ 📜 Day2.png
-┃ ┣ 📜 Day3.png
-┃ ┣ 📜 Day4.png
-┃ ┣ 📜 Day5.png
-┃ ┗ 📜 Week1.png
-┃
-┣ 📂 Project-journey-week2
-┃ ┣ 📜 Day6.png
-┃ ┣ 📜 Day7.png
-┃ ┣ 📜 Day8.png
-┃ ┣ 📜 Day11.png
-┃ ┣ 📜 Day12.png
-┃ ┗ 📜 Day13.png
-┃
-┗ 📜 README.md
+📦 Bluestock-Data-Analyst-Internship
+ ┣ 📂 Hashmil_Submission        # Internship Submission Assets
+ ┣ 📂 bluestock_mf_capstone     # Core Capstone Project
+ ┃ ┣ 📂 data                    # Raw, Processed & SQLite DB
+ ┃ ┣ 📂 notebooks               # Sequential Analysis Workspaces
+ ┃ ┣ 📂 scripts                 # Automation & Predictive Engines
+ ┃ ┣ 📂 reports                 # Analytics Exports & Visuals
+ ┃ ┗ 📜 run_pipeline.py         # Pipeline Controller
+ ┣ 📂 learning-journey-week1    # Week 1 Skill Progress Images
+ ┣ 📂 Project-journey-week2     # Week 2 Milestone Snapshots
+ ┗ 📜 README.md                 # Main Documentation
 ```
 
 ---

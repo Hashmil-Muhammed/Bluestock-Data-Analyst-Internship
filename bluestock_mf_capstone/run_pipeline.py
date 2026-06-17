@@ -25,7 +25,7 @@ def main():
     print("BlueStock Mutual fund analytics pipeline")
     print("=" *60)
     
-    Get the absolute path of the directory where this script is located
+    # Get the absolute path of the directory where this script is located
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
     # Build the exact path to the live_nav_fetch.py script

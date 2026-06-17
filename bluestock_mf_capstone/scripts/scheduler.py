@@ -26,7 +26,7 @@ def run_nav_pipeline():
 # Schedule the task to run every day at 8:00 PM (20:00)
 schedule.every().day.at("20:00").do(run_nav_pipeline)
 
-print("⏰ Watchdog Automated Scheduler is now ACTIVE and monitoring...")
+print("Watchdog Automated Scheduler is now ACTIVE and monitoring...")
 print("This script will automatically fetch NAV every weekday at 8:00 PM.")
 
 # Infinite loop to keep the script running in the background

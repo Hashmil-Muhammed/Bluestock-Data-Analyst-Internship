@@ -11,7 +11,7 @@ def run_optimization():
     db_path = os.path.join(BASE_DIR, '..', 'data', 'db', 'bluestock_mf.db')
     report_path = os.path.join(BASE_DIR, '..', 'reports', 'efficient_frontier.png')
 
-    print("📥 Fetching historical NAV data for Top 5 Funds...")
+    print("Fetching historical NAV data for Top 5 Funds...")
     
     # 2. Fetch Data for Top 5 Funds (Using Benchmark Schemes)
     amfi_codes = ['125497', '119551', '120503', '118632', '119092']
@@ -72,7 +72,7 @@ def run_optimization():
     print(f"Sharpe Ratio: {opt_sharpe:.2f}\n")
 
     # 6. Generate Random Portfolios for the Efficient Frontier Curve
-    print("🎲 Generating 10,000 random portfolios for the Efficient Frontier...")
+    print("Generating 10,000 random portfolios for the Efficient Frontier...")
     num_portfolios = 10000
     results = np.zeros((3, num_portfolios))
     
