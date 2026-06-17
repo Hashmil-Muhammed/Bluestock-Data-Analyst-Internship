@@ -12,4 +12,6 @@ reportlab>=4.1
 nltk>=3.8
 regex
 pytest>=7.4
+pytest-html>=4.1.1
 python-dotenv>=1.0
+

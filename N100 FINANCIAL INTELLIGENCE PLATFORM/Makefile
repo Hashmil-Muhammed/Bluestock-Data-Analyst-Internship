@@ -5,7 +5,7 @@ ratios:
 	python src/analytics/ratios.py
 
 test:
-	pytest tests/ --html=reports/pytest_report.html
+	python -m pytest tests/ --html=reports/pytest_report.html
 
 report:
 	python src/reports/portfolio_report.py
