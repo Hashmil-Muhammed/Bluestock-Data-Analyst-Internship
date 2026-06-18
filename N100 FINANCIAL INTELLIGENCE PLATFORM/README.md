@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # 📈 Nifty 100 Financial Intelligence Platform
@@ -23,6 +22,8 @@
 - [📅 Sprint 1 Progress Tracker](#-sprint-1-progress-tracker)
 - [🚀 Day 1: Environment & Project Foundation](#-day-1-environment--project-foundation)
 - [🛠️ Day 2: Data Loader & Normalizer Engine](#️-day-2-data-loader--normalizer-engine)
+- [🔍 Day 3: Schema Validator (16 DQ Rules)](#-day-3-schema-validator-16-dq-rules)
+- [🗄️ Day 4: Database Schema Engineering](#️-day-4-database-schema-engineering)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -34,7 +35,7 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1 (Day 1 & Day 2)`
+**Sprints Completed:** `Sprint 1 (Day 1 to Day 4)`
 
 **Status:** `Sprint 1 - In Progress`
 
@@ -58,6 +59,16 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 - **Unit Test Suite (`tests/etl/test_normalise.py`):** Authored 23 rigorous unit tests evaluating edge cases for year parsing and ticker string formatting.
 - **Test Execution:** Fully integrated `pytest` with `make test`, generating comprehensive HTML reports with **100% passing results (23/23 tests passed)**.
 
+### 🔹 Day 03: Schema Validator (16 DQ Rules)
+- **Data Quality Engine (`src/etl/validator.py`):** Developed a robust data validation class to ensure data integrity across the pipeline.
+- **Rule Implementation:** Successfully coded critical checks including PK/FK uniqueness (DQ-01, DQ-02), Balance Sheet tally verification (DQ-04), and Positive Sales validation (DQ-06).
+- **Error Logging:** Configured the system to automatically flag violations and export them to `reports/validation_failures.csv`.
+
+### 🔹 Day 04: Database Schema Engineering
+- **Schema Design (`src/etl/schema.sql`):** Architected the foundational SQLite Star Schema layout for the financial warehouse.
+- **Table Creation:** Written strict DDL statements for 10 core tables including `companies`, `profitandloss`, `balancesheet`, and `cashflow`.
+- **Data Integrity:** Enforced `PRAGMA foreign_keys = ON` and established primary/foreign key relationships to maintain standard data normalization.
+
 ---
 
 ## 📂 Repository Structure
@@ -71,8 +82,8 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┣ 📂etl                         # Extraction, Transformation, and Loading
  ┃ ┃ ┣ 📜normaliser.py             # Data cleaning logic
  ┃ ┃ ┣ 📜loader.py                 # Excel reading logic
- ┃ ┃ ┗ 📜validator.py              # Data Quality Rules (Planned)
- ┃ ┗ 📜schema.sql                  # Database Schema definition (Planned)
+ ┃ ┃ ┗ 📜validator.py              # Data Quality Rules
+ ┃ ┗ 📜schema.sql                  # Database Schema definition
  ┣ 📂tests
  ┃ ┗ 📂etl
  ┃   ┗ 📜test_normalise.py         # 23 passing unit tests
@@ -116,5 +127,3 @@ make test
 ### 4. Verify the HTML Test Report
 
 Open the generated file at `reports/pytest_report.html` in any web browser to see the professional pipeline audit execution results.
-README.md
-Displaying README.md.
