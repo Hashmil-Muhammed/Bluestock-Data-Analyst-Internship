@@ -9,7 +9,7 @@
 ![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
-![Status](https://img.shields.io/badge/Sprint_1-In_Progress-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Sprint_1-Completed-brightgreen?style=for-the-badge)
 
 <br>
 
@@ -20,10 +20,13 @@
 
 - [🎯 Project Overview](#-project-overview)
 - [📅 Sprint 1 Progress Tracker](#-sprint-1-progress-tracker)
-- [🚀 Day 1: Environment & Project Foundation](#-day-1-environment--project-foundation)
-- [🛠️ Day 2: Data Loader & Normalizer Engine](#️-day-2-data-loader--normalizer-engine)
-- [🔍 Day 3: Schema Validator (16 DQ Rules)](#-day-3-schema-validator-16-dq-rules)
-- [🗄️ Day 4: Database Schema Engineering](#️-day-4-database-schema-engineering)
+  - [🚀 Day 1: Environment & Project Foundation](#-day-1-environment--project-foundation)
+  - [🛠️ Day 2: Data Loader & Normalizer Engine](#️-day-2-data-loader--normalizer-engine)
+  - [🔍 Day 3: Schema Validator (16 DQ Rules)](#-day-3-schema-validator-16-dq-rules)
+  - [🗄️ Day 4: Database Schema Engineering](#️-day-4-database-schema-engineering)
+  - [🚀 Day 5: Database Loader Pipeline](#-day-5-database-loader-pipeline)
+  - [🧐 Day 6: Data Quality Manual Review](#-day-6-data-quality-manual-review)
+  - [🏁 Day 7: Sprint Wrap-Up](#-day-7-sprint-wrap-up)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -35,9 +38,9 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1 (Day 1 to Day 4)`
+**Sprints Completed:** `Sprint 1 (Day 1 to Day 7)`
 
-**Status:** `Sprint 1 - In Progress`
+**Status:** `Sprint 1 - Completed`
 
 ---
 
@@ -66,36 +69,71 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 ### 🔹 Day 04: Database Schema Engineering
 - **Schema Design (`src/etl/schema.sql`):** Architected the foundational SQLite Star Schema layout for the financial warehouse.
-- **Table Creation:** Written strict DDL statements for 10 core tables including `companies`, `profitandloss`, `balancesheet`, and `cashflow`.
+- **Table Creation:** Written strict DDL statements for 12 tables including `companies`, `profitandloss`, `balancesheet`, and `stock_prices`.
 - **Data Integrity:** Enforced `PRAGMA foreign_keys = ON` and established primary/foreign key relationships to maintain standard data normalization.
+
+### 🚀 Day 05: Database Loader Pipeline
+- **Objective:** Ingest all 12 validated Excel datasets into a centralized SQLite database.
+- **Actions:**
+  - Developed `src/etl/loader.py` to handle automated table creation and data insertion.
+  - Executed schema initialization using `schema.sql`.
+  - Successfully loaded data into all 12 tables (`companies`, `profitandloss`, `stock_prices`, etc.).
+  - Managed table dependencies (Foreign Keys) by ensuring correct load order.
+  - Generated a load audit report (`reports/load_audit.csv`) confirming the successful insertion of all records.
+
+### 🧐 Day 06: Data Quality Manual Review
+- **Objective:** Perform manual checks on the loaded SQLite database to ensure data integrity.
+- **Actions:**
+  - Created a temporary `manual_review.py` script.
+  - Queried 5 random companies to verify the `companies` table data structure.
+  - Checked for minimum year coverage (P&L data). Successfully identified newly listed companies like `JIOFIN` having less than 5 years of data.
+  - Confirmed that the ETL pipeline is bug-free and the database is ready for the Analytics phase.
+
+### 🏁 Day 07: Sprint Wrap-Up
+- **Objective:** Ensure pipeline stability, zero data loss, and finalize Sprint 1.
+- **Actions:**
+  - Executed 10 exploratory SQL queries directly on `nifty100.db` using `exploratory_queries.sql` to verify data completeness and table relationships.
+  - Expanded Pytest unit test coverage to 38 tests (100% pass rate) across `normaliser.py` and `validator.py`.
+  - Completed end-to-end Sprint 1 retrospective. The data foundation is solid and ready for the Analytics Engine.
 
 ---
 
 ## 📂 Repository Structure
 
 ```text
-📦Nifty100_Capstone_Project
+📦N100 FINANCIAL INTELLIGENCE PLATFORM
  ┣ 📂data
- ┃ ┣ 📂raw                         # Immutable source assets & Excel files
- ┃ ┗ 📂supporting                  # Supplementary financial datasets
+ ┃ ┣ 📂raw                         # 7 core Excel files (READ ONLY). Never modify.
+ ┃ ┗ 📂supporting                  # 5 supplementary Excel files.
+ ┣ 📜nifty100.db                   # Primary SQLite database containing all tables.
  ┣ 📂src
  ┃ ┣ 📂etl                         # Extraction, Transformation, and Loading
+ ┃ ┃ ┣ 📜exploratory_queries.sql   # Exploratory queries for DB manual checks
  ┃ ┃ ┣ 📜normaliser.py             # Data cleaning logic
- ┃ ┃ ┣ 📜loader.py                 # Excel reading logic
- ┃ ┃ ┗ 📜validator.py              # Data Quality Rules
- ┃ ┗ 📜schema.sql                  # Database Schema definition
- ┣ 📂tests
+ ┃ ┃ ┣ 📜loader.py                 # Excel reading and DB loading logic
+ ┃ ┃ ┣ 📜validator.py              # Data Quality Rules
+ ┃ ┃ ┗ 📜schema.sql                # Database Schema definition
+ ┃ ┣ 📂analytics                   # Ratios, CAGR, Screener engines, etc.
+ ┃ ┣ 📂nlp                         # Parsers and pros/cons generators
+ ┃ ┣ 📂dashboard                   # Streamlit app and modular pages
+ ┃ ┣ 📂api                         # FastAPI server routers
+ ┃ ┗ 📂reports                     # Report generation scripts (Tearsheets, Sector)
+ ┣ 📂tests                         # Pytest test files (38 tests)
  ┃ ┗ 📂etl
- ┃   ┗ 📜test_normalise.py         # 23 passing unit tests
- ┣ 📂reports
- ┃ ┗ 📜pytest_report.html          # Pytest HTML execution results
- ┣ 📜.env                          # Environment configurations
- ┣ 📜Makefile                      # Automation targets (load, test, ratios, etc.)
+ ┃   ┣ 📜test_normalise.py         # 23 passing unit tests for Normalizer
+ ┃   ┗ 📜test_validator.py         # 15 passing unit tests for DQ Validator
+ ┣ 📂config                        # YAML configurations and .env templates
+ ┣ 📂reports                       # Generated HTML/CSV reports and PDFs
+ ┃ ┣ 📜pytest_report.html          # Pytest HTML execution results
+ ┃ ┣ 📜load_audit.csv              # Database load audit report
+ ┃ ┗ 📜validation_failures.csv     # Data quality validation failures
+ ┣ 📂output                        # Screener exports, ad-hoc CSVs, final archives
+ ┣ 📂notebooks                     # Exploratory Jupyter notebooks
+ ┣ 📂docs                          # Project documents, analyst guides, OpenAPI specs
+ ┣ 📜.env                          # Environment variables
+ ┣ 📜Makefile                      # Automation targets (load, test, api, dashboard)
  ┣ 📜requirements.txt              # Standard system dependencies
- ┣ 📜activate_env.bat              # Quick environment activation script
- ┗ 📜README.md
-```
-
+ ┗ 📜activate_env.bat              # Quick environment activation script
 ---
 
 ## 🛠️ Execution & Setup Guide
