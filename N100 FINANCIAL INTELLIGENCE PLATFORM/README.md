@@ -9,7 +9,7 @@
 ![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
-![Status](https://img.shields.io/badge/Sprint_1-Completed-brightgreen?style=for-the-badge)
+![Status](https://img.shields.io/badge/Sprint_2-In_Progress-yellow?style=for-the-badge)
 
 <br>
 
@@ -19,7 +19,7 @@
 ## 📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
-- [📅 Sprint 1 Progress Tracker](#-sprint-1-progress-tracker)
+- [📅 Sprint 1 Progress Tracker (Data Foundation)](#-sprint-1-progress-tracker-data-foundation)
   - [🚀 Day 1: Environment & Project Foundation](#-day-1-environment--project-foundation)
   - [🛠️ Day 2: Data Loader & Normalizer Engine](#️-day-2-data-loader--normalizer-engine)
   - [🔍 Day 3: Schema Validator (16 DQ Rules)](#-day-3-schema-validator-16-dq-rules)
@@ -27,6 +27,8 @@
   - [🚀 Day 5: Database Loader Pipeline](#-day-5-database-loader-pipeline)
   - [🧐 Day 6: Data Quality Manual Review](#-day-6-data-quality-manual-review)
   - [🏁 Day 7: Sprint Wrap-Up](#-day-7-sprint-wrap-up)
+- [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
+  - [📈 Day 8: Profitability Ratios Implementation](#-day-8-profitability-ratios-implementation)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -38,13 +40,13 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1 (Day 1 to Day 7)`
+**Sprints Completed:** `Sprint 1`
 
-**Status:** `Sprint 1 - Completed`
+**Status:** `Sprint 2 - In Progress`
 
 ---
 
-## 📅 Sprint 1 Progress Tracker
+## 📅 Sprint 1 Progress Tracker (Data Foundation)
 
 ### 🔹 Day 01: Environment & Project Foundation
 - **Directory Structure:** Established a professional workspace layout (`src/`, `tests/`, `data/`, `reports/`).
@@ -98,6 +100,19 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 ---
 
+## 📅 Sprint 2 Progress Tracker (Analytics Engine)
+
+### 📈 Day 08: Profitability Ratios Implementation
+- **Objective:** Program core profitability ratios to measure company financial health.
+- **KPIs Computed:** Net Profit Margin (NPM), Operating Profit Margin (OPM), Return on Equity (ROE), and Return on Capital Employed (ROCE).
+- **Edge Case Handling:**
+  - Handled negative equity scenarios (returning `None` for ROE).
+  - Handled zero sales scenarios (returning `None` for NPM and OPM to avoid `ZeroDivisionError`).
+- **Validation:** Cross-verified calculated OPM values against original source files (`opm_percentage`). Detected expected anomalies in banking/financial sectors.
+- **Deliverable:** `src/analytics/ratios.py`
+
+---
+
 ## 📂 Repository Structure
 
 ```text
@@ -114,6 +129,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜validator.py              # Data Quality Rules
  ┃ ┃ ┗ 📜schema.sql                # Database Schema definition
  ┃ ┣ 📂analytics                   # Ratios, CAGR, Screener engines, etc.
+ ┃ ┃ ┗ 📜ratios.py                 # Profitability Ratio calculations (Day 08)
  ┃ ┣ 📂nlp                         # Parsers and pros/cons generators
  ┃ ┣ 📂dashboard                   # Streamlit app and modular pages
  ┃ ┣ 📂api                         # FastAPI server routers
@@ -165,3 +181,11 @@ make test
 ### 4. Verify the HTML Test Report
 
 Open the generated file at `reports/pytest_report.html` in any web browser to see the professional pipeline audit execution results.
+
+### 5. Run the Analytics Engine (Profitability Ratios)
+
+Execute the script to calculate NPM, OPM, ROE, and ROCE:
+
+```bash
+python -m src.analytics.ratios
+```
