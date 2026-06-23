@@ -29,6 +29,8 @@
   - [🏁 Day 7: Sprint Wrap-Up](#-day-7-sprint-wrap-up)
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
   - [📈 Day 8: Profitability Ratios Implementation](#-day-8-profitability-ratios-implementation)
+  - [⚖️ Day 9: Leverage & Efficiency Ratios](#️-day-9-leverage--efficiency-ratios)
+  - [📊 Day 10: CAGR Calculation Engine](#-day-10-cagr-calculation-engine)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -111,6 +113,23 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 - **Validation:** Cross-verified calculated OPM values against original source files (`opm_percentage`). Detected expected anomalies in banking/financial sectors.
 - **Deliverable:** `src/analytics/ratios.py`
 
+### ⚖️ Day 09: Leverage & Efficiency Ratios
+- **Objective:** Build metrics to evaluate corporate debt levels and asset utilization efficiency.
+- **KPIs Computed:** Debt-to-Equity (D/E) Ratio, Interest Coverage Ratio (ICR), and Asset Turnover Ratio.
+- **Edge Case Handling:**
+  - Developed a Bank Carve-out logic matching company IDs to systematically bypass standard D/E calculations for financial institutions.
+  - Implemented Debt-free substitution (assigning `999.0` for ICR) to prevent errors on companies with zero interest.
+- **Validation:** Authored and passed 5 comprehensive unit tests targeting leverage edge cases.
+- **Deliverable:** Updated `src/analytics/ratios.py` and new `tests/kpi/test_leverage.py`.
+
+### 📊 Day 10: CAGR Calculation Engine
+- **Objective:** Engineer a Compound Annual Growth Rate (CAGR) calculator for evaluating long-term company performance.
+- **KPIs Computed:** Revenue CAGR, PAT CAGR, and EPS CAGR computed across multiple sliding windows (3Y, 5Y, and 10Y).
+- **Edge Case Handling:**
+  - Integrated "Turnaround Flag Logic" to identify companies transitioning from negative to positive net profit.
+  - Solved `RuntimeWarning` exceptions by securely bypassing fractional power calculations on negative bases.
+- **Deliverable:** `src/analytics/cagr.py`
+
 ---
 
 ## 📂 Repository Structure
@@ -129,15 +148,18 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜validator.py              # Data Quality Rules
  ┃ ┃ ┗ 📜schema.sql                # Database Schema definition
  ┃ ┣ 📂analytics                   # Ratios, CAGR, Screener engines, etc.
- ┃ ┃ ┗ 📜ratios.py                 # Profitability Ratio calculations (Day 08)
+ ┃ ┃ ┣ 📜ratios.py                 # Profitability, Leverage & Efficiency Ratios
+ ┃ ┃ ┗ 📜cagr.py                   # Compound Annual Growth Rate engine
  ┃ ┣ 📂nlp                         # Parsers and pros/cons generators
  ┃ ┣ 📂dashboard                   # Streamlit app and modular pages
  ┃ ┣ 📂api                         # FastAPI server routers
  ┃ ┗ 📂reports                     # Report generation scripts (Tearsheets, Sector)
- ┣ 📂tests                         # Pytest test files (38 tests)
- ┃ ┗ 📂etl
- ┃   ┣ 📜test_normalise.py         # 23 passing unit tests for Normalizer
- ┃   ┗ 📜test_validator.py         # 15 passing unit tests for DQ Validator
+ ┣ 📂tests                         # Pytest test files (43 tests total)
+ ┃ ┣ 📂etl
+ ┃ ┃ ┣ 📜test_normalise.py         # 23 passing unit tests for Normalizer
+ ┃ ┃ ┗ 📜test_validator.py         # 15 passing unit tests for DQ Validator
+ ┃ ┗ 📂kpi
+ ┃   ┗ 📜test_leverage.py          # 5 passing unit tests for Day 09 edge cases
  ┣ 📂config                        # YAML configurations and .env templates
  ┣ 📂reports                       # Generated HTML/CSV reports and PDFs
  ┃ ┣ 📜pytest_report.html          # Pytest HTML execution results
@@ -150,7 +172,10 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┣ 📜Makefile                      # Automation targets (load, test, api, dashboard)
  ┣ 📜requirements.txt              # Standard system dependencies
  ┗ 📜activate_env.bat              # Quick environment activation script
+
+```
 ---
+
 
 ## 🛠️ Execution & Setup Guide
 
@@ -184,8 +209,9 @@ Open the generated file at `reports/pytest_report.html` in any web browser to se
 
 ### 5. Run the Analytics Engine (Profitability Ratios)
 
-Execute the script to calculate NPM, OPM, ROE, and ROCE:
+Execute the scripts to calculate Ratios and CAGR metrics:
 
 ```bash
 python -m src.analytics.ratios
+python -m src.analytics.cagr
 ```
