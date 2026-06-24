@@ -31,6 +31,8 @@
   - [📈 Day 8: Profitability Ratios Implementation](#-day-8-profitability-ratios-implementation)
   - [⚖️ Day 9: Leverage & Efficiency Ratios](#️-day-9-leverage--efficiency-ratios)
   - [📊 Day 10: CAGR Calculation Engine](#-day-10-cagr-calculation-engine)
+  - [💸 Day 11: Cash Flow KPIs & Allocation Patterns](#-day-11-cash-flow-kpis--allocation-patterns)
+  - [🗄️ Day 12: Database Population & Core Ingestion](#️-day-12-database-population--core-ingestion)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -130,6 +132,21 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
   - Solved `RuntimeWarning` exceptions by securely bypassing fractional power calculations on negative bases.
 - **Deliverable:** `src/analytics/cagr.py`
 
+### 💸 Day 11: Cash Flow KPIs & Allocation Patterns
+- **Objective:** Analyze cash flow statements to determine liquidity indicators and capital allocation strategies.
+- **KPIs Computed:** Free Cash Flow (FCF), CFO Quality Score, CapEx Intensity, and FCF Conversion Ratio.
+- **Pattern Classification:** Developed a proprietary algorithm to classify companies into 8 Capital Allocation Patterns (e.g., Mature/Cash Cow, High Burn/Startup) based on the polarity of Operating, Investing, and Financing cash flows.
+- **Deliverable:** `src/analytics/cashflow_kpis.py`
+
+### 🗄️ Day 12: Database Population & Core Ingestion
+- **Objective:** Aggregate all calculated analytics and ingest them into the primary SQLite database.
+- **Actions:**
+  - Executed the Profitability, CAGR, and Cash Flow engines simultaneously.
+  - Merged outputs into a master DataFrame using `company_id` and `year` as composite keys to ensure data integrity.
+  - Uploaded 1,467 processed rows to the new `financial_ratios` table in `nifty100.db`.
+  - Conducted random sample cross-verification against raw manual Excel calculations.
+- **Deliverable:** `src/analytics/populate_ratios.py` and updated `nifty100.db`.
+
 ---
 
 ## 📂 Repository Structure
@@ -149,7 +166,9 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┗ 📜schema.sql                # Database Schema definition
  ┃ ┣ 📂analytics                   # Ratios, CAGR, Screener engines, etc.
  ┃ ┃ ┣ 📜ratios.py                 # Profitability, Leverage & Efficiency Ratios
- ┃ ┃ ┗ 📜cagr.py                   # Compound Annual Growth Rate engine
+ ┃ ┃ ┣ 📜cagr.py                   # Compound Annual Growth Rate engine
+ ┃ ┃ ┣ 📜cashflow_kpis.py          # Cash flow metrics & Pattern classification
+ ┃ ┃ ┗ 📜populate_ratios.py        # Master ingestion script to SQLite
  ┃ ┣ 📂nlp                         # Parsers and pros/cons generators
  ┃ ┣ 📂dashboard                   # Streamlit app and modular pages
  ┃ ┣ 📂api                         # FastAPI server routers
@@ -214,4 +233,12 @@ Execute the scripts to calculate Ratios and CAGR metrics:
 ```bash
 python -m src.analytics.ratios
 python -m src.analytics.cagr
+```
+
+### 6. Run the Analytics Engines & Populate Database
+
+Execute the master population script to run all analytical modules and ingest data into SQLite:
+
+```bash
+python -m src.analytics.populate_ratios
 ```
