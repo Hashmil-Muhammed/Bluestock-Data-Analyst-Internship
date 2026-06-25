@@ -95,7 +95,7 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 ## 📈 Project 2: Nifty 100 Financial Intelligence Platform
 *An advanced, end-to-end platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets across 12 distinct modules over a 45-day execution plan.*
 
-**Status:** `Sprint 1 - Completed`
+**Status:** `Sprint 2 - Completed`
 
 ### 📅 Sprint 1 Progress: Data Foundation (Day 1 to Day 7)
 
@@ -106,6 +106,16 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 * **Day 05: Database Loader Pipeline:** Integrated the loader to automatically ingest all 12 validated Excel datasets into a centralized `nifty100.db` SQLite database, generating a `load_audit.csv` report.
 * **Day 06: Data Quality Manual Review:** Performed manual checks via direct SQL queries using a temporary script to verify table structures and check year coverage (e.g., identifying newly listed companies like `JIOFIN` having `< 5 years` of data).
 * **Day 07: Sprint Wrap-Up:** Executed 10 exploratory SQL queries directly on `nifty100.db` to verify data completeness. Expanded Pytest unit test coverage to 38 tests (100% pass rate) across ETL components.
+
+### 📅 Sprint 2 Progress: Analytics Engine (Day 8 to Day 14)
+
+* **Day 08: Profitability Ratios Implementation:** Computed core metrics (Net Profit Margin, Operating Profit Margin, ROE, ROCE) across 1,200+ historical records handling edge cases like negative equity and zero sales.
+* **Day 09: Leverage & Efficiency Ratios:** Engineered Debt-to-Equity, Interest Coverage Ratio, and Asset Turnover with specialized banking carve-out logic (ignoring deposits as standard debt).
+* **Day 10: CAGR Calculation Engine:** Built sliding window (3Y, 5Y, 10Y) compound growth calculators managing negative-base mathematical constraints using a custom `Turnaround` flag.
+* **Day 11: Cash Flow KPIs & Allocation Patterns:** Derived Free Cash Flow, CFO Quality Score, and created a proprietary 8-class Capital Allocation Pattern classification algorithm based on CFO, CFI, and CFF polarity.
+* **Day 12: Database Population & Core Ingestion:** Seamlessly merged outputs from all analytical sub-engines and successfully ingested 1,467 processed KPI rows into the SQLite `financial_ratios` table.
+* **Day 13: Specialized Banking ROCE Adjustments:** Developed sector-relative approaches for Banks/NBFCs, logging 54 analytical anomalies to `sector_roce_notes.csv` to ensure data intelligence integrity.
+* **Day 14: Final Test Validation & Retrospective:** Authored and achieved a 100% green pass rate across 25 rigorous edge-case unit tests. Generated `ratio_edge_cases.log` and the `sprint2_retro.md` post-mortem.
 
 ---
 
@@ -141,26 +151,25 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 
 ```text
 📦 Bluestock-Data-Analyst-Internship
- ┣ 📂 Hashmil_Submission                             # Internship Submission Assets
- ┣ 📂 bluestock_mf_capstone                          # Project 1: Mutual Fund Analytics
- ┃ ┣ 📂 data                                         # Raw, Processed & SQLite DB
- ┃ ┣ 📂 notebooks                                    # Sequential Analysis Workspaces
- ┃ ┣ 📂 scripts                                      # Automation & Predictive Engines
- ┃ ┣ 📂 reports                                      # Analytics Exports & Visuals
- ┃ ┗ 📜 run_pipeline.py                              # Pipeline Controller
- ┣ 📂 N100 FINANCIAL INTELLIGENCE PLATFORM           # Project 2: Nifty 100 Platform
- ┃ ┣ 📂 data                                         # Raw and supporting Excel files
- ┃ ┣ 📂 src                                          # ETL, analytics, dashboard, api
- ┃ ┣ 📂 tests                                        # Pytest suite (38+ tests)
- ┃ ┣ 📂 reports                                      # Pytest HTML & Audit CSVs
- ┃ ┣ 📜 nifty100.db                                  # Primary SQLite database
- ┃ ┣ 📜 Makefile                                     # Automation targets
- ┃ ┗ 📜 activate_env.bat                             # Env activation
- ┣ 📂 learning-journey-week1                         # Week 1 Skill Progress Images
- ┣ 📂 Capstone-Project_journey-week2                 # capstone Milestone Snapshots
- ┣ 📂 N100_financial_intelligence-Project_journey    # N100 Milestone Snapshots
+ ┣ 📂 Hashmil_Submission                     # Internship Submission Assets
+ ┣ 📂 bluestock_mf_capstone                  # Project 1: Mutual Fund Analytics
+ ┃ ┣ 📂 data                                 # Raw, Processed & SQLite DB
+ ┃ ┣ 📂 notebooks                            # Sequential Analysis Workspaces
+ ┃ ┣ 📂 scripts                              # Automation & Predictive Engines
+ ┃ ┣ 📂 reports                              # Analytics Exports & Visuals
+ ┃ ┗ 📜 run_pipeline.py                      # Pipeline Controller
+ ┣ 📂 N100 FINANCIAL INTELLIGENCE PLATFORM   # Project 2: Nifty 100 Platform
+ ┃ ┣ 📂 data                                 # Raw and supporting Excel files
+ ┃ ┣ 📂 src                                  # ETL, analytics, dashboard, api
+ ┃ ┣ 📂 tests                                # Pytest suite (60+ tests)
+ ┃ ┣ 📂 reports                              # Pytest HTML & Audit CSVs, Edge Case Logs
+ ┃ ┣ 📜 nifty100.db                          # Primary SQLite database
+ ┃ ┣ 📜 Makefile                             # Automation targets
+ ┃ ┗ 📜 activate_env.bat                     # Env activation
+ ┣ 📂 learning-journey-week1                 # Week 1 Skill Progress Images
+ ┣ 📂 Capstone-Project_journey-week2         # capstone Milestone Snapshots
+ ┣ 📂 N100_financial_intelligence-Project_journey # N100 Milestone Snapshots
  ┗ 📜 README.md
-
 ```
 
 ## 🚀 How to Run the Project
@@ -200,6 +209,10 @@ cd "N100 FINANCIAL INTELLIGENCE PLATFORM"
 
 # Run the database loader pipeline
 make load
+
+# Run the Analytics Engines & Populate Database (Sprint 2)
+python -m src.analytics.populate_ratios
+python -m src.analytics.banking_roce
 
 # Execute unit tests & generate HTML report
 make test
