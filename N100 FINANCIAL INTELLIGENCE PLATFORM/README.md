@@ -10,7 +10,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
 ![Status](https://img.shields.io/badge/Sprint_2-Completed-success?style=for-the-badge)
-![Status](https://img.shields.io/badge/Sprint_3-Upcoming-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Sprint_3-In_Progress-yellow?style=for-the-badge)
 
 <br>
 
@@ -36,6 +36,8 @@
   - [🗄️ Day 12: Database Population & Core Ingestion](#️-day-12-database-population--core-ingestion)
   - [🏦 Day 13: Specialized Banking ROCE Adjustments](#-day-13-specialized-banking-roce-adjustments)
   - [✅ Day 14: Final Test Validation & Retrospective](#-day-14-final-test-validation--retrospective)
+- [📅 Sprint 3 Progress Tracker (Screener Engine)](#-sprint-3-progress-tracker-screener-engine)
+  - [⚙️ Day 15: Custom Filter Engine & YAML Configuration](#️-day-15-custom-filter-engine--yaml-configuration)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -49,7 +51,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 **Sprints Completed:** `Sprint 1`, `Sprint 2`
 
-**Status:** `Sprint 3 (Screener Engine) - Ready to Start`
+**Status:** `Sprint 3 (Screener Engine) - In Progress`
 
 ---
 
@@ -127,6 +129,17 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 ---
 
+## 📅 Sprint 3 Progress Tracker (Screener Engine)
+
+### ⚙️ Day 15: Custom Filter Engine & YAML Configuration
+- **Objective:** Build a multi-criteria stock screener engine driven by an external configuration file without hardcoding thresholds.
+- **Actions:** - Designed `screener_config.yaml` to dynamically store screener parameters.
+  - Programmed the `ScreenerEngine` class (`src/analytics/screener/engine.py`) to connect to the SQLite `financial_ratios` table, load YAML criteria, and apply threshold filters dynamically via Pandas.
+  - Successfully executed and tested the engine against the database.
+- **Deliverable:** `config/screener_config.yaml`, `src/analytics/screener/engine.py`
+
+---
+
 ## 📂 Repository Structure
 
 ```text
@@ -143,6 +156,8 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜validator.py              
  ┃ ┃ ┗ 📜schema.sql                
  ┃ ┣ 📂analytics                   # Ratios, CAGR, Cashflow engines
+ ┃ ┃ ┣ 📂screener                  # Multi-criteria Screener Engine
+ ┃ ┃ ┃ ┗ 📜engine.py               
  ┃ ┃ ┣ 📜ratios.py                 
  ┃ ┃ ┣ 📜cagr.py                   
  ┃ ┃ ┣ 📜cashflow_kpis.py          
@@ -160,6 +175,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃   ┣ 📜test_leverage.py          
  ┃   ┗ 📜test_analytics_engine.py  # 25 full analytics KPI tests
  ┣ 📂config                        
+ ┃ ┗ 📜screener_config.yaml        # Screener thresholds configuration
  ┣ 📂reports                       # Exported findings and logs
  ┃ ┣ 📜pytest_report.html          
  ┃ ┣ 📜load_audit.csv              
@@ -232,5 +248,13 @@ Run the comprehensive test suite to validate all ETL and Analytics (KPI) logic:
 make test
 # OR
 pytest tests/
+```
+
+### 8. Run the Screener Engine (Sprint 3)
+
+Execute the dynamic screener engine to filter companies based on custom parameters:
+
+```bash
+python -m src.analytics.screener.engine
 ```
 

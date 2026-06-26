@@ -1,0 +1,11 @@
+# Screener Configurations
+quality_screener:
+  roe: 15
+  debt_to_equity: 1.0
+  fcf : 0
+
+value_screener:
+  pe_ratio: 20
+  pb_ratio: 3
+
+  
