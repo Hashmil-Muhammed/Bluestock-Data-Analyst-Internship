@@ -21,23 +21,8 @@
 
 - [🎯 Project Overview](#-project-overview)
 - [📅 Sprint 1 Progress Tracker (Data Foundation)](#-sprint-1-progress-tracker-data-foundation)
-  - [🚀 Day 1: Environment & Project Foundation](#-day-1-environment--project-foundation)
-  - [🛠️ Day 2: Data Loader & Normalizer Engine](#️-day-2-data-loader--normalizer-engine)
-  - [🔍 Day 3: Schema Validator (16 DQ Rules)](#-day-3-schema-validator-16-dq-rules)
-  - [🗄️ Day 4: Database Schema Engineering](#️-day-4-database-schema-engineering)
-  - [🚀 Day 5: Database Loader Pipeline](#-day-5-database-loader-pipeline)
-  - [🧐 Day 6: Data Quality Manual Review](#-day-6-data-quality-manual-review)
-  - [🏁 Day 7: Sprint Wrap-Up](#-day-7-sprint-wrap-up)
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
-  - [📈 Day 8: Profitability Ratios Implementation](#-day-8-profitability-ratios-implementation)
-  - [⚖️ Day 9: Leverage & Efficiency Ratios](#️-day-9-leverage--efficiency-ratios)
-  - [📊 Day 10: CAGR Calculation Engine](#-day-10-cagr-calculation-engine)
-  - [💸 Day 11: Cash Flow KPIs & Allocation Patterns](#-day-11-cash-flow-kpis--allocation-patterns)
-  - [🗄️ Day 12: Database Population & Core Ingestion](#️-day-12-database-population--core-ingestion)
-  - [🏦 Day 13: Specialized Banking ROCE Adjustments](#-day-13-specialized-banking-roce-adjustments)
-  - [✅ Day 14: Final Test Validation & Retrospective](#-day-14-final-test-validation--retrospective)
-- [📅 Sprint 3 Progress Tracker (Screener Engine)](#-sprint-3-progress-tracker-screener-engine)
-  - [⚙️ Day 15: Custom Filter Engine & YAML Configuration](#️-day-15-custom-filter-engine--yaml-configuration)
+- [📅 Sprint 3 Progress Tracker (Screener & Ranking Engine)](#-sprint-3-progress-tracker-screener--ranking-engine)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -132,11 +117,18 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 ## 📅 Sprint 3 Progress Tracker (Screener Engine)
 
 ### ⚙️ Day 15: Custom Filter Engine & YAML Configuration
-- **Objective:** Build a multi-criteria stock screener engine driven by an external configuration file without hardcoding thresholds.
-- **Actions:** - Designed `screener_config.yaml` to dynamically store screener parameters.
-  - Programmed the `ScreenerEngine` class (`src/analytics/screener/engine.py`) to connect to the SQLite `financial_ratios` table, load YAML criteria, and apply threshold filters dynamically via Pandas.
-  - Successfully executed and tested the engine against the database.
-- **Deliverable:** `config/screener_config.yaml`, `src/analytics/screener/engine.py`
+- **Objective:** Build a multi-criteria stock screener engine driven by YAML.
+- **Actions:** Configured `screener_config.yaml` and implemented dynamic filtering using Pandas.
+
+### 🔍 Day 16: Preset Screener Implementation
+- **Objective:** Configure 6 preset screeners (Quality, Value, Growth, Dividend, Momentum, Debt-free).
+- **Actions:** Tested presets on the 92-company universe and verified business logic consistency.
+
+### 🏆 Day 17: Composite Ranking Engine
+- **Objective:** Develop a ranking engine using a weighted composite score.
+- **Actions:** - Implemented weighting: Profitability (50%), Growth (30%), Valuation (20%).
+  - Performed sector-relative normalization.
+  - Exported final rankings to `screener_output.xlsx`.
 
 ---
 
@@ -147,8 +139,10 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┣ 📂data
  ┃ ┣ 📂raw                         # 7 core Excel files (READ ONLY).
  ┃ ┗ 📂supporting                  # 5 supplementary Excel files.
- ┣ 📜nifty100.db                   # Primary SQLite database.
- ┣ 📂src
+ ┣ 📜nifty100.db      
+ config
+ ┃ ┗ 📜screener_config.yaml             # Primary SQLite database.
+ ┃ ┗ 📜logging_config.yaml       
  ┃ ┣ 📂etl                         # Extraction, Transformation, and Loading
  ┃ ┃ ┣ 📜exploratory_queries.sql   
  ┃ ┃ ┣ 📜normaliser.py             
@@ -181,7 +175,13 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┣ 📜load_audit.csv              
  ┃ ┣ 📜validation_failures.csv     
  ┃ ┣ 📜sector_roce_notes.csv       # Day 13 Anomaly logs
- ┃ ┗ 📜ratio_edge_cases.log        # Day 14 KPI constraints documentation
+ ┃ ┗ 📜ratio_edge_cases.log        # Day 14 KPI constraints 
+ ┃ ┗ 📜screener_output.xlsx
+ scripts
+ ┣ ┗ 📜 ranking_engine.py
+ ┣ ┗ 📜 check_db.py
+ ┣ ┗ 📜 screener_preset_test.py
+ documentation
  ┣ 📂output                        
  ┣ 📂notebooks                     
  ┣ 📂docs                          # Analyst guides & Retrospectives
@@ -250,11 +250,24 @@ make test
 pytest tests/
 ```
 
-### 8. Run the Screener Engine (Sprint 3)
+### 8. Run the Screener Engine 
 
 Execute the dynamic screener engine to filter companies based on custom parameters:
 
 ```bash
 python -m src.analytics.screener.engine
 ```
+
+### 9. Run Screener Engine
+
+```bash
+python scripts/screener_preset_test.py
+```
+
+### 10. Generate Ranking Report
+
+```bash
+python scripts/ranking_engine.py
+```
+
 
