@@ -130,6 +130,14 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
   - Performed sector-relative normalization.
   - Exported final rankings to `screener_output.xlsx`.
 
+### 🏦 Day 18: Peer Group Module
+- **Objective:** Compute peer-relative performance.
+- **Actions:** Loaded `peer_groups.xlsx`, calculated `PERCENT_RANK` for key metrics per sector, and populated the `peer_percentiles` table in `nifty100.db`.
+
+### 🕸️ Day 19: Radar Chart Visualization
+- **Objective:** Generate visual performance comparisons.
+- **Actions:** Engineered a Plotly visualization module to generate radar charts for each company against its peer group median. Exported 56 PNG charts to `reports/radar_charts/`.
+
 ---
 
 ## 📂 Repository Structure
@@ -269,5 +277,13 @@ python scripts/screener_preset_test.py
 ```bash
 python scripts/ranking_engine.py
 ```
+
+### 11. Generate Peer Percentiles & Charts
+
+```bash
+python -m src.analytics.peer
+python -m src.reports.radar_charts
+```
+
 
 
