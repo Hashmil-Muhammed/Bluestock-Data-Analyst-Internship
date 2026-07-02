@@ -95,40 +95,39 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 ## 📈 Project 2: Nifty 100 Financial Intelligence Platform
 *An advanced, end-to-end platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets across 12 distinct modules over a 45-day execution plan.*
 
-**Status:** `Sprint 2 - Completed`
+**Status:** `Sprint 3 - Completed`
 
-### 📅 Sprint 1 Progress: Data Foundation (Day 1 to Day 7)
+### 📅 Sprint 1 Progress: Data Foundation (Day 1 - 7)
+- **Data Loading:** Automated pipeline to ingest 12 datasets into SQLite.
+- **Validation:** Implemented 16 DQ rules and SQL schema design.
 
-* **Day 01: Environment & Project Foundation:** Established a professional workspace layout (`src/`, `tests/`, `data/`, `reports/`). Set up a clean virtual environment, configured `requirements.txt`, created a custom `Makefile`, and a Windows `.bat` script for quick activation.
-* **Day 02: Data Loader & Normalizer Engine:** Developed robust data cleansing functions (`normalize_ticker`, `normalize_year`) in `src/etl/normaliser.py`. Built an automated pipeline (`loader.py`) to read complex Excel files. Authored 23 rigorous unit tests with 100% passing results via Pytest-HTML.
-* **Day 03: Schema Validator (16 DQ Rules):** Developed `validator.py` to ensure data integrity. Coded critical checks including PK/FK uniqueness, Balance Sheet tally verification, and Positive Sales validation.
-* **Day 04: Database Schema Engineering:** Architected the foundational SQLite Star Schema (`schema.sql`). Written strict DDL statements for 12 core tables enforcing Foreign Key constraints.
-* **Day 05: Database Loader Pipeline:** Integrated the loader to automatically ingest all 12 validated Excel datasets into a centralized `nifty100.db` SQLite database, generating a `load_audit.csv` report.
-* **Day 06: Data Quality Manual Review:** Performed manual checks via direct SQL queries using a temporary script to verify table structures and check year coverage (e.g., identifying newly listed companies like `JIOFIN` having `< 5 years` of data).
-* **Day 07: Sprint Wrap-Up:** Executed 10 exploratory SQL queries directly on `nifty100.db` to verify data completeness. Expanded Pytest unit test coverage to 38 tests (100% pass rate) across ETL components.
+### 📅 Sprint 2 Progress: Analytics Engine (Day 8 - 14)
+- **KPIs:** Computed ROE, ROCE, CAGR (3Y/5Y/10Y), and FCF metrics.
+- **Banking Adjustments:** Developed sector-specific ROCE logic for Banks/NBFCs.
+- **Validation:** 100% test coverage with 38 unit tests.
 
-### 📅 Sprint 2 Progress: Analytics Engine (Day 8 to Day 14)
-
-* **Day 08: Profitability Ratios Implementation:** Computed core metrics (Net Profit Margin, Operating Profit Margin, ROE, ROCE) across 1,200+ historical records handling edge cases like negative equity and zero sales.
-* **Day 09: Leverage & Efficiency Ratios:** Engineered Debt-to-Equity, Interest Coverage Ratio, and Asset Turnover with specialized banking carve-out logic (ignoring deposits as standard debt).
-* **Day 10: CAGR Calculation Engine:** Built sliding window (3Y, 5Y, 10Y) compound growth calculators managing negative-base mathematical constraints using a custom `Turnaround` flag.
-* **Day 11: Cash Flow KPIs & Allocation Patterns:** Derived Free Cash Flow, CFO Quality Score, and created a proprietary 8-class Capital Allocation Pattern classification algorithm based on CFO, CFI, and CFF polarity.
-* **Day 12: Database Population & Core Ingestion:** Seamlessly merged outputs from all analytical sub-engines and successfully ingested 1,467 processed KPI rows into the SQLite `financial_ratios` table.
-* **Day 13: Specialized Banking ROCE Adjustments:** Developed sector-relative approaches for Banks/NBFCs, logging 54 analytical anomalies to `sector_roce_notes.csv` to ensure data intelligence integrity.
-* **Day 14: Final Test Validation & Retrospective:** Authored and achieved a 100% green pass rate across 25 rigorous edge-case unit tests. Generated `ratio_edge_cases.log` and the `sprint2_retro.md` post-mortem.
+### 📅 Sprint 3 Progress: Screener & Peer Engine (Day 15 - 21)
+- **Day 15-16:** Built a YAML-driven filter engine with 6 preset screeners (Quality, Value, Growth, Dividend, Momentum, Debt-free).
+- **Day 17:** Implemented Composite Ranking Engine with sector-relative normalization.
+- **Day 18:** Developed the Peer Group Module using `PERCENT_RANK` logic.
+- **Day 19:** Engineered Radar Chart visualization module via Plotly.
+- **Day 20:** Built robust reporting pipeline (`peer_comparison.py`) using Pandas merge to map Ranks with Financial Metrics.
+- **Day 21:** Final Sprint Wrap. Performed comprehensive DQ tests on `peer_percentiles` (all green/pass) and completed `sprint3_retro.md`.
 
 ---
 
 ## 🏆 Internship Achievements
 
 - ✅ Completed Bluestock Fintech Data Analyst Internship
-- ✅ Developed End-to-End Mutual Fund Analytics Platform
+- ✅ Built Nifty 100 End-to-End Financial Platform
+- ✅ Implemented Complex Financial Engines (CAGR, Peer Ranking, Screener)
 - ✅ Built Interactive Power BI Dashboard
 - ✅ Designed Star Schema Data Warehouse
 - ✅ Implemented SQLAlchemy & Pandas ETL Pipelines
 - ✅ Developed Risk-Based Fund Recommendation System
 - ✅ Executed Comprehensive Pytest Testing Suites
 - ✅ Automated Complete Data Processing Workflows
+- ✅ Achieved 100% Test Coverage for Critical Modules
 
 ---
 
@@ -159,18 +158,26 @@ Over the course of this intensive internship, I progressed from foundational Pyt
  ┃ ┣ 📂 reports                              # Analytics Exports & Visuals
  ┃ ┗ 📜 run_pipeline.py                      # Pipeline Controller
  ┣ 📂 N100 FINANCIAL INTELLIGENCE PLATFORM   # Project 2: Nifty 100 Platform
- ┃ ┣ 📂 data                                 # Raw and supporting Excel files
- ┃ ┣ 📂 src                                  # ETL, analytics, dashboard, api
- ┃ ┣ 📂 tests                                # Pytest suite (60+ tests)
- ┃ ┣ 📂 reports                              # Pytest HTML & Audit CSVs, Edge Case Logs
- ┃ ┣ 📜 nifty100.db                          # Primary SQLite database
- ┃ ┣ 📜 Makefile                             # Automation targets
- ┃ ┗ 📜 activate_env.bat                     # Env activation
+ ┃  ┣ 📂data
+ ┃  ┃ ┣ 📂raw                                # 7 core Excel files
+ ┃  ┃ ┗ 📂supporting                         # 5 supplementary Excel files
+ ┃  ┣ 📂src
+ ┃  ┃ ┣ 📂etl                                # Loaders & Validators
+ ┃  ┃ ┣ 📂analytics                          # Ratio Engine, Screener, Peer Engine
+ ┃  ┃ ┣ 📂reports                            # Peer Comparison & Tearsheet scripts
+ ┃  ┃ ┗ 📂dashboard                          # Streamlit Frontend
+ ┃  ┣ 📂tests
+ ┃  ┃ ┣ 📂etl                                # Validator Tests
+ ┃  ┃ ┣ 📂kpi                                # Analytics Engine Tests
+ ┃  ┃ ┗ 📂dq                                 # Data Quality Tests (Sprint 3)
+ ┃  ┣ 📂output                               # Peer Comparison Excels
+ ┃  ┣ 📂docs                                 # Sprint Retrospectives
+ ┃  ┗ 📜nifty100.db                          # Main Database
  ┣ 📂 learning-journey-week1                 # Week 1 Skill Progress Images
  ┣ 📂 Capstone-Project_journey-week2         # capstone Milestone Snapshots
  ┣ 📂 N100_financial_intelligence-Project_journey # N100 Milestone Snapshots
  ┗ 📜 README.md
-```
+```                # Main Database
 
 ## 🚀 How to Run the Project
 

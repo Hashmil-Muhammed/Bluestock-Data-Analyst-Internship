@@ -10,7 +10,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
 ![Status](https://img.shields.io/badge/Sprint_2-Completed-success?style=for-the-badge)
-![Status](https://img.shields.io/badge/Sprint_3-In_Progress-yellow?style=for-the-badge)
+![Status](https://img.shields.io/badge/Sprint_3-Completed-success?style=for-the-badge)
 
 <br>
 
@@ -34,9 +34,9 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1`, `Sprint 2`
+**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3`
 
-**Status:** `Sprint 3 (Screener Engine) - In Progress`
+**Status:** `Sprint 4 (Dashboard Development) - Next`
 
 ---
 
@@ -138,6 +138,16 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 - **Objective:** Generate visual performance comparisons.
 - **Actions:** Engineered a Plotly visualization module to generate radar charts for each company against its peer group median. Exported 56 PNG charts to `reports/radar_charts/`.
 
+### 📊 Day 20: Peer Comparison Excel Reports
+- **Objective:** Generate robust, sector-wise peer comparison Excel reports.
+- **Actions:** Built `src/reports/peer_comparison.py`. Resolved complex data mapping issues by implementing a Pandas `merge` to accurately join percentile rank data (`peer_percentiles`) with actual financial metrics (`financial_ratios`), ensuring correct ROE and NPM values in the final outputs.
+
+### 🏁 Day 21: Sprint 3 Final Wrap & DQ Tests
+- **Objective:** Validate Sprint 3 data integrity and conduct retrospective.
+- **Actions:** - Authored and ran `tests/dq/test_dq_sprint3.py`, ensuring all percentile ranks fall strictly within the valid 0-100 bounds and checking for null assignment failures.
+  - Achieved 100% Green DQ pass rate.
+  - Documented action items, learnings, and data merging workarounds in `docs/sprint3_retro.md`. Sprint 3 officially closed.
+
 ---
 
 ## 📂 Repository Structure
@@ -147,10 +157,11 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┣ 📂data
  ┃ ┣ 📂raw                         # 7 core Excel files (READ ONLY).
  ┃ ┗ 📂supporting                  # 5 supplementary Excel files.
- ┣ 📜nifty100.db      
- config
- ┃ ┗ 📜screener_config.yaml             # Primary SQLite database.
+ ┣ 📜nifty100.db                   # Primary SQLite database.
+ ┣ 📂config
+ ┃ ┣ 📜screener_config.yaml        # Screener thresholds configuration
  ┃ ┗ 📜logging_config.yaml       
+ ┣ 📂src
  ┃ ┣ 📂etl                         # Extraction, Transformation, and Loading
  ┃ ┃ ┣ 📜exploratory_queries.sql   
  ┃ ┃ ┣ 📜normaliser.py             
@@ -164,36 +175,39 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜cagr.py                   
  ┃ ┃ ┣ 📜cashflow_kpis.py          
  ┃ ┃ ┣ 📜populate_ratios.py        
+ ┃ ┃ ┣ 📜peer.py                   # Peer ranking calculations
  ┃ ┃ ┗ 📜banking_roce.py           # Specialized financial sector analysis
+ ┃ ┣ 📂reports                     # Report Generation Scripts
+ ┃ ┃ ┣ 📜radar_charts.py           # Radar chart plot generation
+ ┃ ┃ ┗ 📜peer_comparison.py        # Sector-wise Excel report builder
  ┃ ┣ 📂nlp                         # Upcoming (Sprint 4)
  ┃ ┣ 📂dashboard                   # Upcoming (Sprint 5)
- ┃ ┣ 📂api                         # Upcoming (Sprint 6)
- ┃ ┗ 📂reports                     # Generated Reports
- ┣ 📂tests                         # Pytest test files
+ ┃ ┗ 📂api                         # Upcoming (Sprint 6)
+ ┣ 📂tests                         # Pytest and DQ test files
  ┃ ┣ 📂etl
  ┃ ┃ ┣ 📜test_normalise.py         
  ┃ ┃ ┗ 📜test_validator.py         
- ┃ ┗ 📂kpi
- ┃   ┣ 📜test_leverage.py          
- ┃   ┗ 📜test_analytics_engine.py  # 25 full analytics KPI tests
- ┣ 📂config                        
- ┃ ┗ 📜screener_config.yaml        # Screener thresholds configuration
+ ┃ ┣ 📂kpi
+ ┃ ┃ ┣ 📜test_leverage.py          
+ ┃ ┃ ┗ 📜test_analytics_engine.py  # 25 full analytics KPI tests
+ ┃ ┗ 📂dq
+ ┃   ┗ 📜test_dq_sprint3.py        # Sprint 3 Data Quality validation rules
  ┣ 📂reports                       # Exported findings and logs
  ┃ ┣ 📜pytest_report.html          
  ┃ ┣ 📜load_audit.csv              
  ┃ ┣ 📜validation_failures.csv     
  ┃ ┣ 📜sector_roce_notes.csv       # Day 13 Anomaly logs
  ┃ ┗ 📜ratio_edge_cases.log        # Day 14 KPI constraints 
- ┃ ┗ 📜screener_output.xlsx
- scripts
- ┣ ┗ 📜 ranking_engine.py
- ┣ ┗ 📜 check_db.py
- ┣ ┗ 📜 screener_preset_test.py
- documentation
  ┣ 📂output                        
+ ┃ ┗ 📜peer_comparison.xlsx        # Generated peer comparison output
+ ┣ 📂scripts
+ ┃ ┣ 📜ranking_engine.py
+ ┃ ┣ 📜check_db.py
+ ┃ ┗ 📜screener_preset_test.py
  ┣ 📂notebooks                     
  ┣ 📂docs                          # Analyst guides & Retrospectives
- ┃ ┗ 📜sprint2_retro.md            # Sprint 2 post-mortem analysis
+ ┃ ┣ 📜sprint2_retro.md            # Sprint 2 post-mortem analysis
+ ┃ ┗ 📜sprint3_retro.md            # Sprint 3 post-mortem analysis
  ┣ 📜.env                          
  ┣ 📜Makefile                      
  ┣ 📜requirements.txt              
@@ -283,6 +297,18 @@ python scripts/ranking_engine.py
 ```bash
 python -m src.analytics.peer
 python -m src.reports.radar_charts
+```
+
+### 12. Generate Peer Comparison Excel Reports
+
+```bash
+python src/reports/peer_comparison.py  
+```
+
+### 13. Run Sprint 3 Data Quality (DQ) Tests
+
+```bash
+python tests/dq/test_dq_sprint3.py
 ```
 
 
