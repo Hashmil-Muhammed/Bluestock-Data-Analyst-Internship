@@ -177,7 +177,8 @@ Over the course of this intensive internship, I progressed from foundational Pyt
  ┣ 📂 Capstone-Project_journey-week2         # capstone Milestone Snapshots
  ┣ 📂 N100_financial_intelligence-Project_journey # N100 Milestone Snapshots
  ┗ 📜 README.md
-```                # Main Database
+```                
+---
 
 ## 🚀 How to Run the Project
 

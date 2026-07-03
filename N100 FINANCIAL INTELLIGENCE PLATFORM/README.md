@@ -9,8 +9,7 @@
 ![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
-![Status](https://img.shields.io/badge/Sprint_2-Completed-success?style=for-the-badge)
-![Status](https://img.shields.io/badge/Sprint_3-Completed-success?style=for-the-badge)
+
 
 <br>
 
@@ -23,6 +22,7 @@
 - [📅 Sprint 1 Progress Tracker (Data Foundation)](#-sprint-1-progress-tracker-data-foundation)
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
 - [📅 Sprint 3 Progress Tracker (Screener & Ranking Engine)](#-sprint-3-progress-tracker-screener--ranking-engine)
+- [📅 Sprint 4 Progress Tracker (Dashboard & Valuation)](#-sprint-4-progress-tracker-dashboard--valuation)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -36,8 +36,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 **Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3`
 
-**Status:** `Sprint 4 (Dashboard Development) - Next`
-
+**Status:** `Sprint 4 (Dashboard Development) - In Progress`
 ---
 
 ## 📅 Sprint 1 Progress Tracker (Data Foundation)
@@ -150,6 +149,35 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 ---
 
+## 📅 Sprint 4 Progress Tracker (Dashboard & Valuation)
+
+### 📅 Day 22: Dashboard Foundation & Scaffold
+- **Task 1:** Established directory structure (`src/dashboard/pages/`).
+- **Task 2:** Created `src/dashboard/utils/db.py` with `@st.cache_data` for efficient data fetching.
+- **Task 3:** Built `app.py` entry point with custom styling, sidebar logo, and branding.
+
+### 📅 Day 23: Home & Company Profile Screens
+- **5.1 Home / Overview:** Displayed market health, top KPIs, and sector donut chart.
+- **5.2 Company Profile:** Implemented ticker search, 6-metric KPI tiles, and dynamic charts.
+
+### 📅 Day 24: Screener & Peer Comparison Screens
+- **5.3 Financial Screener:** Integrated sidebar sliders for real-time data filtering.
+- **5.4 Peer Comparison:** Peer group dropdown selector with integrated Radar Chart visualizations.
+
+### 📅 Day 25: Trend Analysis, Sector & Allocation
+- **5.5-5.8 Analysis:** Built Trend sparklines, Sector bubble charts, Capital Allocation Treemap, and Annual Report links.
+
+### 📅 Day 26: Valuation & Market Data Module
+- **Valuation Analytics:** Computed P/E, P/B, EV/EBITDA trends using `market_cap.xlsx`. Implemented logic to flag Caution/Discount badges.
+
+### 📅 Day 27: Integration Testing & QA
+- **Dashboard QA:** Tested all 8 screens, fixed responsiveness, and documented results in `tests/dq/dashboard_qa.md`.
+
+### 📅 Day 28: Sprint Wrap-Up
+- **Retrospective:** Finalized project demo preparation, updated navigation guide, and closed Sprint 4.
+
+---
+
 ## 📂 Repository Structure
 
 ```text
@@ -212,8 +240,9 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┣ 📜Makefile                      
  ┣ 📜requirements.txt              
  ┗ 📜activate_env.bat
----
+ ```
 
+---
 
 ## 🛠️ Execution & Setup Guide
 
@@ -310,6 +339,14 @@ python src/reports/peer_comparison.py
 ```bash
 python tests/dq/test_dq_sprint3.py
 ```
+
+### 14. Launch the Dashboard
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+
 
 
 
