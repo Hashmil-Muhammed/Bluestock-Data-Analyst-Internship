@@ -1,11 +1,23 @@
 import streamlit as st
+import os
+import sys
+from pathlib import Path
+
+# 1. First: Set up the path
+root_path = Path(__file__).resolve().parents[1] # This points to the 'src' folder
+sys.path.append(str(root_path))
+
+# 2. Second: Now import from dashboard
+from dashboard.utils.db import load_data
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Set page configuration
 st.set_page_config(
-    page_title = "Nifty 100 Intelligence",
-    page_icon = "📈",
-    layout ="wide",
-    initial_sidebar_state = "expanded"
+    page_title="Nifty 100 Intelligence",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Sidebar configuration (Logo & Navigation)

@@ -3,14 +3,14 @@ import pandas as pd
 import streamlit as st
 import os
 
-# Define the database path
-DB_PATH = 'nifty100.db'
+# FIX 1: Added 'r' before the string to make it a raw string. 
+# This prevents \n in \nifty100.db from breaking the path.
+DB_PATH = r'G:\My Drive\WorkSpace\Bluestock_Fintech_Data_Analyst_Intern\Intership at BlueStock\N100 FINANCIAL INTELLIGENCE PLATFORM\nifty100.db'
 
 @st.cache_data
 def load_data(query):
     """
     Function to fetch data from SQLite database with caching.
-    Uses @st.cache_data to prevent redundant database hits.
     """
     if not os.path.exists(DB_PATH):
         st.error(f"Database file not found at {DB_PATH}")
@@ -32,8 +32,7 @@ def get_table_names():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = [row(0) for row in cursor.fetchall()]
+    # FIX 2: Changed row(0) to row[0] 
+    tables = [row[0] for row in cursor.fetchall()]
     conn.close()
     return tables
-
-    
