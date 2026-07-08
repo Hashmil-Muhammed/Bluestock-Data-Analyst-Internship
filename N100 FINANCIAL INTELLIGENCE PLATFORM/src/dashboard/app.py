@@ -20,6 +20,20 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+st.markdown("""
+    <style>
+    /* Hide unnecessary horizontal scrollbar in the sidebar */
+    [data-testid="stSidebar"] {
+        overflow-x: hidden;
+    }
+    /* Wrap long text to the next line for selectboxes and radio buttons */
+    .stSelectbox label, .stRadio label {
+        white-space: normal;
+        word-wrap: break-word;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Sidebar configuration (Logo & Navigation)
 st.sidebar.title("Nifty 100 Intelligence")
 st.sidebar.markdown("---")

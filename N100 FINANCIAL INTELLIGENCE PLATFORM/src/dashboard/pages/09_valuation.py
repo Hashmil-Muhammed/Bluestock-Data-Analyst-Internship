@@ -150,8 +150,9 @@ def render_valuation_analysis():
     # ==========================================
     # STEP 6: VISUALIZATIONS (TASK 1)
     # ==========================================
+    # UI FIX: Gracefully handle missing data edge case
     if df_filtered.empty:
-        st.info("No data available for the selected filters.")
+        st.warning("⚠️ No data available for the selected filters. Please try another company or sector.")
         return
 
     st.subheader("Multiples Analysis Dashboard")

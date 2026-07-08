@@ -339,12 +339,24 @@ python src/reports/peer_comparison.py
 ```bash
 python tests/dq/test_dq_sprint3.py
 ```
+---
 
-### 14. Launch the Dashboard
+## 🚀 How to Run the Dashboard
+This project features a fully interactive 9-screen multi-page Streamlit application. Follow these steps to run the dashboard locally:
+#### 1. Install Dependencies:
+Ensure you have Python installed. Activate your virtual environment and install the required libraries:
+```bash
+pip install streamlit pandas plotly sqlite3
+```
 
+#### 2. Run the Application:
+Navigate to the root directory of the project and execute the following command:
 ```bash
 streamlit run src/dashboard/app.py
 ```
+
+#### 3. Access the Dashboard:
+Once the server starts, open your browser and navigate to the local URL provided in the terminal (usually http://localhost:8501).
 
 
 

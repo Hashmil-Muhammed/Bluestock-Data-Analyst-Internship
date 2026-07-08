@@ -114,6 +114,11 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 - **Day 20:** Built robust reporting pipeline (`peer_comparison.py`) using Pandas merge to map Ranks with Financial Metrics.
 - **Day 21:** Final Sprint Wrap. Performed comprehensive DQ tests on `peer_percentiles` (all green/pass) and completed `sprint3_retro.md`.
 
+### 📅 Sprint 4 Progress: Dashboard Integration & UI Polishing (Day 22 - 28)
+- **Day 22-26:** Built the dynamic **Valuation & Market Data Module** providing relative EV/EBITDA calculations, automated valuation badges (`🔴 Caution` and `🟢 Discount`), and integrated FCF Yield rankings alongside dividend threshold criteria sliders.
+- **Day 27:** Conducted comprehensive end-to-end user acceptance testing across all 8 screens using 10 random tickers. Applied custom CSS properties to fix layout parameters and responsive charts.
+- **Day 28:** Completed full sprint retrospect log (`sprint4_retro.md`) and compiled detailed analyst system user documentation records.
+
 ---
 
 ## 🏆 Internship Achievements
@@ -187,7 +192,7 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 ```bash
 git clone https://github.com/Hashmil-Muhammed/Bluestock-Data-Analyst-Internship.git
 
-cd bluestock-data-analyst-internship
+ cd bluestock-data-analyst-internship
 ```
 <!-- 
 ### Install Dependencies
@@ -196,35 +201,51 @@ cd bluestock-data-analyst-internship
 pip install -r requirements.txt
 ``` -->
 
-### 🔹 Project 1: Mutual Fund Pipeline
+## 🔹 Project 1: Mutual Fund Pipeline
 
+#### Run Live NAV Fetcher
 ```bash
-# Run Live NAV Fetcher
 python bluestock_mf_capstone/scripts/live_nav_fetch.py
+```
 
-# Run Fund Recommendation Engine
+### Run Fund Recommendation Engine
+```bash
 python bluestock_mf_capstone/scripts/recommender.py
+```
 
-# Run Complete Pipeline
+### Run Complete Pipeline
+```bash
 python bluestock_mf_capstone/run_pipeline.py
 ```
 
-### 🔹 Project 2: Nifty 100 ETL Pipeline (Sprint 1)
-
+## 🔹 Project 2: Nifty 100 ETL Pipeline
 ```bash
 cd "N100 FINANCIAL INTELLIGENCE PLATFORM"
 .\activate_env.bat
+```
 
-# Run the database loader pipeline
+### Run the database loader pipeline
+```bash
 make load
+```
 
-# Run the Analytics Engines & Populate Database (Sprint 2)
+### Run the Analytics Engines & Populate Database
+```bash
 python -m src.analytics.populate_ratios
-python -m src.analytics.banking_roce
+ python -m src.analytics.banking_roce
+```
 
-# Execute unit tests & generate HTML report
+### Execute unit tests & generate HTML report
+```bash
 make test
 ```
+
+### Run the Interactive Dashboard App:
+To initiate the production-ready interactive Streamlit dashboard system locally, run the main file path using:
+```bash
+streamlit run src/dashboard/app.py
+```
+Once executed successfully, access the local client layout from your web browser engine via http://localhost:8501.
 
 ---
 
