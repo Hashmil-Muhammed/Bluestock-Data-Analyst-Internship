@@ -23,6 +23,7 @@
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
 - [📅 Sprint 3 Progress Tracker (Screener & Ranking Engine)](#-sprint-3-progress-tracker-screener--ranking-engine)
 - [📅 Sprint 4 Progress Tracker (Dashboard & Valuation)](#-sprint-4-progress-tracker-dashboard--valuation)
+- [📅 Sprint 5 Progress Tracker (NLP & Cash Flow Intelligence)](#-sprint-5-progress-tracker-nlp--cash-flow-intelligence)
 - [📂 Repository Structure](#-repository-structure)
 - [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
 
@@ -34,9 +35,9 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3`
+**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3, Sprint 4`
 
-**Status:** `Sprint 4 (Dashboard Development) - In Progress`
+**Status:** `Sprint 5 (NLP & Cash Flow Intelligence) - In Progress`
 ---
 
 ## 📅 Sprint 1 Progress Tracker (Data Foundation)
@@ -175,6 +176,23 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 
 ### 📅 Day 28: Sprint Wrap-Up
 - **Retrospective:** Finalized project demo preparation, updated navigation guide, and closed Sprint 4.
+
+---
+
+## 📅 Sprint 5 Progress Tracker (NLP & Cash Flow Intelligence)
+
+### 🧠 Day 29: NLP Module Parser & Business Tagger
+- **CAGR Cross-Validator:** Engineered `src/analytics/cagr_validator.py` to parse text metrics and cross-validate against the Ratio Engine database computations, intelligently flagging divergences >5%.
+- **Business Description Tagger:** Built `src/analytics/business_tagger.py` utilizing an NLP keyword-matching algorithm to classify company sectors from raw business descriptions and validate them against actual database records.
+
+### ⚖️ Day 30: Automated Pros/Cons & Sentiment Scoring
+- **Auto Pros/Cons Rule Engine:** Developed `src/analytics/pros_cons_generator.py` mapping 12 positive and 12 negative KPI thresholds (e.g., ROE > 20%, D/E > 2) to dynamically generate over 130 qualitative insights with automated confidence scoring.
+- **Sentiment Scorer:** Integrated NLTK VADER via `src/analytics/sentiment_scorer.py` to conduct basic polarity scoring on the generated text, scientifically validating the positive/negative tone of the generated pros and cons.
+
+### 💸 Day 31: Cash Flow Quality & CapEx Analysis
+- **CFO Quality Score:** Authored `src/analytics/cashflow_intelligence.py` to evaluate core earnings quality based on 5-year average CFO/PAT ratios, assigning badges such as 'High Quality Earnings' and 'Accrual Risk'.
+- **CapEx Intensity & FCF Conversion:** Expanded cash flow analytics (`src/analytics/cashflow_task2.py`) to calculate CapEx/Revenue % and FCF/EBITDA ratios, successfully identifying asset-light vs. capital-intensive business models.
+- **FCF CAGR Engine:** Computed 5-year and 10-year Free Cash Flow CAGR via `src/analytics/cashflow_task3.py`, tracking long-term cash generation trends and appending all insights into `cashflow_intelligence.xlsx`.
 
 ---
 
@@ -338,6 +356,23 @@ python src/reports/peer_comparison.py
 
 ```bash
 python tests/dq/test_dq_sprint3.py
+```
+
+### 14. Run Sprint 5 (NLP & Cash Flow Modules)
+
+```bash
+# Validation & Tagger
+python src/analytics/cagr_validator.py
+python src/analytics/business_tagger.py
+
+# Pros/Cons & Sentiment
+python src/analytics/pros_cons_generator.py
+python src/analytics/sentiment_scorer.py
+
+# Cashflow Intelligence
+python src/analytics/cashflow_intelligence.py
+python src/analytics/cashflow_task2.py
+python src/analytics/cashflow_task3.py
 ```
 ---
 
