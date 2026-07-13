@@ -35,9 +35,9 @@ This repository contains the Capstone Project for the **Bluestock Fintech Data A
 
 The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3, Sprint 4`
+**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3`, `Sprint 4`, `Sprint 5`
 
-**Status:** `Sprint 5 (NLP & Cash Flow Intelligence) - In Progress`
+**Status:** `Sprint 6 (Dashboard Optimization & Final Export) - In Progress`
 ---
 
 ## 📅 Sprint 1 Progress Tracker (Data Foundation)
@@ -194,6 +194,23 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 - **CapEx Intensity & FCF Conversion:** Expanded cash flow analytics (`src/analytics/cashflow_task2.py`) to calculate CapEx/Revenue % and FCF/EBITDA ratios, successfully identifying asset-light vs. capital-intensive business models.
 - **FCF CAGR Engine:** Computed 5-year and 10-year Free Cash Flow CAGR via `src/analytics/cashflow_task3.py`, tracking long-term cash generation trends and appending all insights into `cashflow_intelligence.xlsx`.
 
+### ⚠️ Day 32: Financial Distress & Capital Allocation
+- **Distress Rule Engine:** Developed `src/analytics/distress_flags.py` to automatically flag companies facing operational crisis or actively deleveraging. Output saved to `distress_alerts.csv`.
+- **Capital Allocation Matrix:** Built `src/analytics/capital_allocation.py` to map 8 distinct CFO/CFI/CFF sign patterns to descriptive business phases (e.g., Cash Cow, Aggressive Growth) and appended these labels to the cash flow intelligence report.
+
+### 📈 Day 33: Portfolio Statistics & Correlation Heatmaps
+- **Portfolio Stats:** Generated portfolio-level distributions (`src/analytics/portfolio_stats.py`) calculating P10, P25, P50, P75, P90, Mean, and Std for key metrics across the Nifty 100.
+- **Correlation & Outliers:** Engineered `src/analytics/correlation_outliers.py` to compute a Pearson Correlation Matrix for 10 core KPIs (visualized as a heatmap via Plotly) and implemented an Outlier Detection algorithm using Z-scores (|Z| > 3).
+
+### 🤖 Day 34: KMeans ML Clustering & Profiling
+- **Unsupervised ML:** Implemented `scikit-learn` in `src/analytics/kmeans_clustering.py` to cluster Nifty 100 companies based on 5 key features (ROE, D/E, OPM, Rev CAGR, FCF CAGR). Validated $k=5$ using the Elbow Method.
+- **Cluster Profiling:** Developed `src/analytics/cluster_profiling.py` to dynamically assign descriptive business profiles (e.g., High-Quality Growth, Distressed, Value Cyclicals) based on cluster centroids.
+
+### 📄 Day 35: Automated PDF Report Generator & QA
+- **ReportLab Integration:** Built a robust PDF pipeline (`src/analytics/pdf_generator.py` & `src/analytics/sector_screener_pdf.py`) utilizing `ReportLab` and `Matplotlib`.
+- **Automated Deliverables:** Successfully auto-generated Company Tearsheets (with bar charts and KPI tables), Sector Intelligence Reports, Portfolio Summaries, and Top 10 Screener Outputs.
+- **Sprint 5 QA Validation:** Executed `src/analytics/sprint5_review.py` to automatically validate PDF generation, audit CF distress flags, and check NLP coverage.
+
 ---
 
 ## 📂 Repository Structure
@@ -214,7 +231,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜loader.py                 
  ┃ ┃ ┣ 📜validator.py              
  ┃ ┃ ┗ 📜schema.sql                
- ┃ ┣ 📂analytics                   # Ratios, CAGR, Cashflow engines
+ ┃ ┣ 📂analytics                   # Ratios, CAGR, Cashflow, and ML engines
  ┃ ┃ ┣ 📂screener                  # Multi-criteria Screener Engine
  ┃ ┃ ┃ ┗ 📜engine.py               
  ┃ ┃ ┣ 📜ratios.py                 
@@ -222,12 +239,21 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜cashflow_kpis.py          
  ┃ ┃ ┣ 📜populate_ratios.py        
  ┃ ┃ ┣ 📜peer.py                   # Peer ranking calculations
- ┃ ┃ ┗ 📜banking_roce.py           # Specialized financial sector analysis
+ ┃ ┃ ┣ 📜banking_roce.py           # Specialized financial sector analysis
+ ┃ ┃ ┣ 📜distress_flags.py         # Module 7: CF Distress Analysis
+ ┃ ┃ ┣ 📜capital_allocation.py     # Module 7: Allocation Matrix
+ ┃ ┃ ┣ 📜portfolio_stats.py        # Module 10: Statistical Distribution
+ ┃ ┃ ┣ 📜correlation_outliers.py   # Module 10: Heatmaps & Z-Score
+ ┃ ┃ ┣ 📜kmeans_clustering.py      # Module 10: ML Clustering Algorithm
+ ┃ ┃ ┣ 📜cluster_profiling.py      # Module 10: ML Cluster labeling
+ ┃ ┃ ┣ 📜pdf_generator.py          # Module 8: Tearsheet PDF generation
+ ┃ ┃ ┣ 📜sector_screener_pdf.py    # Module 8: Sector & Screener PDFs
+ ┃ ┃ ┗ 📜sprint5_review.py         # Sprint 5 QA script
  ┃ ┣ 📂reports                     # Report Generation Scripts
  ┃ ┃ ┣ 📜radar_charts.py           # Radar chart plot generation
  ┃ ┃ ┗ 📜peer_comparison.py        # Sector-wise Excel report builder
- ┃ ┣ 📂nlp                         # Upcoming (Sprint 4)
- ┃ ┣ 📂dashboard                   # Upcoming (Sprint 5)
+ ┃ ┣ 📂nlp                         # NLP modules (Sprint 5)
+ ┃ ┣ 📂dashboard                   # Streamlit Frontend (Sprint 4)
  ┃ ┗ 📂api                         # Upcoming (Sprint 6)
  ┣ 📂tests                         # Pytest and DQ test files
  ┃ ┣ 📂etl
@@ -238,12 +264,16 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┗ 📜test_analytics_engine.py  # 25 full analytics KPI tests
  ┃ ┗ 📂dq
  ┃   ┗ 📜test_dq_sprint3.py        # Sprint 3 Data Quality validation rules
- ┣ 📂reports                       # Exported findings and logs
+ ┣ 📂reports                       # Exported findings, logs, and PDFs
  ┃ ┣ 📜pytest_report.html          
  ┃ ┣ 📜load_audit.csv              
  ┃ ┣ 📜validation_failures.csv     
  ┃ ┣ 📜sector_roce_notes.csv       # Day 13 Anomaly logs
- ┃ ┗ 📜ratio_edge_cases.log        # Day 14 KPI constraints 
+ ┃ ┣ 📜ratio_edge_cases.log        # Day 14 KPI constraints 
+ ┃ ┣ 📂tearsheets                  # Generated PDF Tearsheets
+ ┃ ┣ 📂portfolio                   # Generated Portfolio Summary PDFs
+ ┃ ┣ 📂sector                      # Generated Sector Report PDFs
+ ┃ ┗ 📂screener                    # Generated Screener Output PDFs
  ┣ 📂output                        
  ┃ ┗ 📜peer_comparison.xlsx        # Generated peer comparison output
  ┣ 📂scripts
@@ -361,18 +391,29 @@ python tests/dq/test_dq_sprint3.py
 ### 14. Run Sprint 5 (NLP & Cash Flow Modules)
 
 ```bash
-# Validation & Tagger
+# Validation, Tagger, Pros/Cons & Sentiment
 python src/analytics/cagr_validator.py
 python src/analytics/business_tagger.py
-
-# Pros/Cons & Sentiment
 python src/analytics/pros_cons_generator.py
 python src/analytics/sentiment_scorer.py
 
-# Cashflow Intelligence
+# Cashflow Intelligence & Matrix
 python src/analytics/cashflow_intelligence.py
 python src/analytics/cashflow_task2.py
 python src/analytics/cashflow_task3.py
+python src/analytics/distress_flags.py
+python src/analytics/capital_allocation.py
+
+# ML Clustering, Statistics & Heatmaps
+python src/analytics/portfolio_stats.py
+python src/analytics/correlation_outliers.py
+python src/analytics/kmeans_clustering.py
+python src/analytics/cluster_profiling.py
+
+# Automated PDF Reports & Final Sprint QA
+python src/analytics/pdf_generator.py
+python src/analytics/sector_screener_pdf.py
+python src/analytics/sprint5_review.py
 ```
 ---
 

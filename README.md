@@ -119,6 +119,12 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 - **Day 27:** Conducted comprehensive end-to-end user acceptance testing across all 8 screens using 10 random tickers. Applied custom CSS properties to fix layout parameters and responsive charts.
 - **Day 28:** Completed full sprint retrospect log (`sprint4_retro.md`) and compiled detailed analyst system user documentation records.
 
+### 📅 Sprint 5 Progress: NLP, Cash Flow Intelligence & ML (Day 29 - 35)
+- **Day 29-30 (NLP):** Built NLP parsers for CAGR cross-validation and business description tagging. Developed an automated Pros/Cons rule engine and Sentiment Scorer using NLTK VADER.
+- **Day 31-32 (Cash Flow):** Implemented Cash Flow Quality scoring, CapEx Analysis, Distress Rule Engine (`distress_flags.py`), and a Capital Allocation Matrix (`capital_allocation.py`).
+- **Day 33-34 (ML & Stats):** Generated Portfolio Statistics and Pearson Correlation Heatmaps. Applied unsupervised Machine Learning (KMeans Clustering) to categorize companies by financial profiles and validated using the Elbow Method.
+- **Day 35 (PDF Automation):** Engineered a robust automated PDF report generator using ReportLab. Successfully generated Company Tearsheets, Sector Reports, Portfolio Summaries, and Screener Outputs, followed by a final QA validation script.
+
 ---
 
 ## 🏆 Internship Achievements
@@ -143,11 +149,12 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 | Programming | Python |
 | Data Analysis | Pandas, NumPy |
 | Visualization | Matplotlib, Seaborn, Plotly |
-| Dashboarding | Power BI |
+| Machine Learning & NLP | Scikit-learn, NLTK (VADER) |
+| Dashboarding | Power BI, Streamlit |
 | Database | PostgreSQL, SQLite |
 | Testing & QA | Pytest, Pytest-HTML |
-| APIs | FastAPI, Flask, REST APIs |
-| Tools | Git, GitHub, Jupyter Notebook, Streamlit Cloud |
+| Automation & Reporting| ReportLab, Makefile |
+| Tools | Git, GitHub, Jupyter Notebook |
 
 ---
 
@@ -177,6 +184,7 @@ Over the course of this intensive internship, I progressed from foundational Pyt
  ┃  ┃ ┗ 📂dq                                 # Data Quality Tests (Sprint 3)
  ┃  ┣ 📂output                               # Peer Comparison Excels
  ┃  ┣ 📂docs                                 # Sprint Retrospectives
+ ┃  ┣ 📂reports                              # Generated PDFs (Tearsheets, Sector, Portfolio)
  ┃  ┗ 📜nifty100.db                          # Main Database
  ┣ 📂 learning-journey-week1                 # Week 1 Skill Progress Images
  ┣ 📂 Capstone-Project_journey-week2         # capstone Milestone Snapshots
@@ -192,14 +200,14 @@ Over the course of this intensive internship, I progressed from foundational Pyt
 ```bash
 git clone https://github.com/Hashmil-Muhammed/Bluestock-Data-Analyst-Internship.git
 
- cd bluestock-data-analyst-internship
+cd bluestock-data-analyst-internship
 ```
-<!-- 
+
 ### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
-``` -->
+```
 
 ## 🔹 Project 1: Mutual Fund Pipeline
 
@@ -244,6 +252,33 @@ make test
 To initiate the production-ready interactive Streamlit dashboard system locally, run the main file path using:
 ```bash
 streamlit run src/dashboard/app.py
+```
+
+### NLP, Cash Flow, ML & PDF Generators
+```bash
+# Validation, Tagger, Pros/Cons & Sentiment
+python src.analytics.cagr_validator
+python src.analytics.business_tagger
+python src.analytics.pros_cons_generator
+python src.analytics.sentiment_scorer
+
+# Cashflow Intelligence & Matrix
+python src.analytics.cashflow_intelligence
+python src.analytics.cashflow_task2
+python src.analytics.cashflow_task3
+python src.analytics.distress_flags
+python src.analytics.capital_allocation
+
+# ML Clustering, Statistics & Heatmaps
+python src.analytics.portfolio_stats
+python src.analytics.correlation_outliers
+python src.analytics.kmeans_clustering
+python src.analytics.cluster_profiling
+
+# Automated PDF Reports & Final Sprint QA
+python src.analytics.pdf_generator
+python src.analytics.sector_screener_pdf
+python src.analytics.sprint5_review
 ```
 Once executed successfully, access the local client layout from your web browser engine via http://localhost:8501.
 

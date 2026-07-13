@@ -37,7 +37,7 @@ def calculate_fcf_cagr():
         print(f" Error reading database: {e}")
         return
 
-    # --- CLEANING HELPER ---
+    #  CLEANING HELPER 
     def clean_df(df):
         df.columns = [str(c).lower().strip() for c in df.columns]
         df = df.loc[:, ~df.columns.duplicated()]
