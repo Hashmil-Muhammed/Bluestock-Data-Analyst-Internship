@@ -8,6 +8,8 @@
 ![Pandas](https://img.shields.io/badge/Pandas-Analytics-purple?style=for-the-badge&logo=pandas&logoColor=white)
 ![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Live_App-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
 
 
@@ -19,25 +21,84 @@
 ## 📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
+- [🚀 Key Features](#-key-features)
+- [⚙️ Tech Stack](#️-tech-stack)
+- [🏃‍♂️ Running the Live Platform (API & Dashboard)](#️-running-the-live-platform-api--dashboard)
 - [📅 Sprint 1 Progress Tracker (Data Foundation)](#-sprint-1-progress-tracker-data-foundation)
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
 - [📅 Sprint 3 Progress Tracker (Screener & Ranking Engine)](#-sprint-3-progress-tracker-screener--ranking-engine)
 - [📅 Sprint 4 Progress Tracker (Dashboard & Valuation)](#-sprint-4-progress-tracker-dashboard--valuation)
 - [📅 Sprint 5 Progress Tracker (NLP & Cash Flow Intelligence)](#-sprint-5-progress-tracker-nlp--cash-flow-intelligence)
+- [📅 Sprint 6 Progress Tracker (API, Testing & Delivery)](#-sprint-6-progress-tracker-api-testing--delivery)
 - [📂 Repository Structure](#-repository-structure)
-- [🛠️ Execution & Setup Guide](#️-execution--setup-guide)
+- [🛠️ Execution & Setup Guide (Dev Mode)](#️-execution--setup-guide-dev-mode)
 
 ---
 
 ## 🎯 Project Overview
 
-This repository contains the Capstone Project for the **Bluestock Fintech Data Analytics Internship**.
+This repository contains the Capstone Project for the **Bluestock Fintech Data Analytics Internship**. 
 
-The goal of this project is to build an end-to-end Financial Intelligence Platform analyzing data for the Nifty 100 companies. The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
+The **Nifty 100 Financial Intelligence Platform** is a comprehensive, automated data pipeline and analytics dashboard designed for equity research analysts. It extracts, normalizes, and analyzes 10 years of historical financial data for the NSE Nifty 100 companies, generating over 50 Key Performance Indicators (KPIs) and serving them via a high-performance REST API.
 
-**Sprints Completed:** `Sprint 1`, `Sprint 2`, `Sprint 3`, `Sprint 4`, `Sprint 5`
+The project processes 12 source datasets (7 core and 5 supplementary) across 12 distinct modules over a 45-day execution plan.
 
-**Status:** `Sprint 6 (Dashboard Optimization & Final Export) - In Progress`
+**Status:** `Completed - Final Release v1.0`
+---
+## 🚀 Key Features
+
+* **ETL Pipeline:** Automated extraction and cleaning of 10+ years of P&L, Balance Sheet, and Cash Flow data.
+* **Advanced Analytics:** Pre-computed 50+ financial ratios, CAGR metrics, and CFO Quality Scores.
+* **REST API:** 16 highly optimized endpoints built with FastAPI, handling concurrent screener queries in <0.5 seconds.
+* **Streamlit Dashboard:** Interactive front-end for market overview, custom screening, and company profiling.
+* **Automated Tearsheets:** Dynamic PDF generation for executive financial summaries.
+
+---
+## ⚙️ Tech Stack
+
+* **Backend:** Python 3.10, FastAPI, Uvicorn
+* **Database:** SQLite3 (Indexed for performance)
+* **Frontend:** Streamlit
+* **Data Processing & ML:** Pandas, NumPy, Scikit-Learn
+* **Testing & QA:** Pytest (130+ unit/integration tests)
+* **Formatting & Linting:** Black, Ruff
+
+---
+
+
+## 🏃‍♂️ Running the Live Platform (API & Dashboard)
+
+This project features a fully interactive 9-screen multi-page Streamlit application powered by a FastAPI backend. You need two terminal windows to run the platform locally.
+
+### **1. Install Dependencies & Setup Environment**
+
+Ensure you have Python installed. Activate your virtual environment and install the required libraries:
+
+```bash
+python -m venv .venv
+.\activate_env.bat  # On Windows
+pip install -r requirements.txt
+python src/etl/loader.py  # Initialize DB
+```
+
+### **2. Terminal 1: Start the Backend API Server**
+
+```bash
+uvicorn src.api.main:app --port 8000 --reload
+```
+
+**API Docs available at:** <http://127.0.0.1:8000/docs>
+
+### **3. Terminal 2: Start the Frontend Dashboard**
+
+Navigate to the root directory and execute:
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+**Dashboard available at:** <http://localhost:8501>
+
 ---
 
 ## 📅 Sprint 1 Progress Tracker (Data Foundation)
@@ -211,11 +272,46 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 - **Automated Deliverables:** Successfully auto-generated Company Tearsheets (with bar charts and KPI tables), Sector Intelligence Reports, Portfolio Summaries, and Top 10 Screener Outputs.
 - **Sprint 5 QA Validation:** Executed `src/analytics/sprint5_review.py` to automatically validate PDF generation, audit CF distress flags, and check NLP coverage.
 
+--- 
+
+## 📅 Sprint 6 Progress Tracker (API, Testing & Delivery)
+
+### 🌐 Day 36-40: FastAPI Backend Development
+
+- **Objective:** Serve all analytical data to the frontend via REST API.
+
+- **Actions:** Built `src/api/main.py` and 16 modular endpoints under `src/api/routers/`. Validated endpoints using Postman.
+
+
+### 🧪 Day 41-42: Testing & Quality Assurance
+
+- **Objective:** Ensure 100% code stability.
+
+- **Actions:** Wrote comprehensive unit tests (`tests/etl`, `tests/kpi`, `tests/api`). Achieved full pass rate (**137 tests passed**) and exported `pytest_report.html`.
+
+
+### ⚡ Day 43: Performance Optimization & Integration
+
+- **Objective:** Load testing and DB optimization.
+
+- **Actions:** Added SQLite indexes (`scripts/optimize_db.py`). Handled **10 concurrent screener API requests** in **< 0.5 seconds**. Documented in `perf_notes.md`.
+
+
+### 📚 Day 44: Documentation & Formatting
+
+- **Objective:** Standardize code and document the platform.
+
+- **Actions:** Applied **black** and **ruff** formatting. Wrote the final `analyst_guide.pdf`. Archived deliverables.
+
+
+### 🏆 Day 45: Final Delivery & Sign-Off
+
+- **Objective:** Handover the project.
+
+- **Actions:** Generated `acceptance_checklist.pdf`. Validated all **20 Acceptance Gates**. Tagged repository as **Release v1.0**.
+
 ---
-
-## 📂 Repository Structure
-
-```text
+```
 📦N100 FINANCIAL INTELLIGENCE PLATFORM
  ┣ 📂data
  ┃ ┣ 📂raw                         # 7 core Excel files (READ ONLY).
@@ -240,50 +336,51 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
  ┃ ┃ ┣ 📜populate_ratios.py        
  ┃ ┃ ┣ 📜peer.py                   # Peer ranking calculations
  ┃ ┃ ┣ 📜banking_roce.py           # Specialized financial sector analysis
- ┃ ┃ ┣ 📜distress_flags.py         # Module 7: CF Distress Analysis
- ┃ ┃ ┣ 📜capital_allocation.py     # Module 7: Allocation Matrix
- ┃ ┃ ┣ 📜portfolio_stats.py        # Module 10: Statistical Distribution
- ┃ ┃ ┣ 📜correlation_outliers.py   # Module 10: Heatmaps & Z-Score
- ┃ ┃ ┣ 📜kmeans_clustering.py      # Module 10: ML Clustering Algorithm
- ┃ ┃ ┣ 📜cluster_profiling.py      # Module 10: ML Cluster labeling
- ┃ ┃ ┣ 📜pdf_generator.py          # Module 8: Tearsheet PDF generation
- ┃ ┃ ┣ 📜sector_screener_pdf.py    # Module 8: Sector & Screener PDFs
- ┃ ┃ ┗ 📜sprint5_review.py         # Sprint 5 QA script
+ ┃ ┃ ┣ 📜distress_flags.py         # CF Distress Analysis
+ ┃ ┃ ┣ 📜capital_allocation.py     # Allocation Matrix
+ ┃ ┃ ┣ 📜portfolio_stats.py        # Statistical Distribution
+ ┃ ┃ ┣ 📜correlation_outliers.py   # Heatmaps & Z-Score
+ ┃ ┃ ┣ 📜kmeans_clustering.py      # ML Clustering Algorithm
+ ┃ ┃ ┣ 📜cluster_profiling.py      # ML Cluster labeling
+ ┃ ┃ ┣ 📜pdf_generator.py          # Tearsheet PDF generation
+ ┃ ┃ ┣ 📜sector_screener_pdf.py    # Sector & Screener PDFs
+ ┃ ┃ ┗ 📜sprint5_review.py         # QA script
  ┃ ┣ 📂reports                     # Report Generation Scripts
  ┃ ┃ ┣ 📜radar_charts.py           # Radar chart plot generation
  ┃ ┃ ┗ 📜peer_comparison.py        # Sector-wise Excel report builder
- ┃ ┣ 📂nlp                         # NLP modules (Sprint 5)
- ┃ ┣ 📂dashboard                   # Streamlit Frontend (Sprint 4)
- ┃ ┗ 📂api                         # Upcoming (Sprint 6)
+ ┃ ┣ 📂nlp                         # NLP modules
+ ┃ ┣ 📂dashboard                   # Streamlit Frontend UI
+ ┃ ┗ 📂api                         # FastAPI REST Endpoints
  ┣ 📂tests                         # Pytest and DQ test files
  ┃ ┣ 📂etl
- ┃ ┃ ┣ 📜test_normalise.py         
- ┃ ┃ ┗ 📜test_validator.py         
  ┃ ┣ 📂kpi
- ┃ ┃ ┣ 📜test_leverage.py          
- ┃ ┃ ┗ 📜test_analytics_engine.py  # 25 full analytics KPI tests
- ┃ ┗ 📂dq
- ┃   ┗ 📜test_dq_sprint3.py        # Sprint 3 Data Quality validation rules
+ ┃ ┣ 📂dq
+ ┃ ┗ 📂api
  ┣ 📂reports                       # Exported findings, logs, and PDFs
  ┃ ┣ 📜pytest_report.html          
  ┃ ┣ 📜load_audit.csv              
  ┃ ┣ 📜validation_failures.csv     
- ┃ ┣ 📜sector_roce_notes.csv       # Day 13 Anomaly logs
- ┃ ┣ 📜ratio_edge_cases.log        # Day 14 KPI constraints 
- ┃ ┣ 📂tearsheets                  # Generated PDF Tearsheets
- ┃ ┣ 📂portfolio                   # Generated Portfolio Summary PDFs
- ┃ ┣ 📂sector                      # Generated Sector Report PDFs
- ┃ ┗ 📂screener                    # Generated Screener Output PDFs
+ ┃ ┣ 📜sector_roce_notes.csv       
+ ┃ ┣ 📜ratio_edge_cases.log        
+ ┃ ┣ 📂tearsheets                  
+ ┃ ┣ 📂portfolio                   
+ ┃ ┣ 📂sector                      
+ ┃ ┗ 📂screener                    
  ┣ 📂output                        
- ┃ ┗ 📜peer_comparison.xlsx        # Generated peer comparison output
+ ┃ ┣ 📜peer_comparison.xlsx        
+ ┃ ┗ 📂final_deliverables          # Archive of v1.0 Release files
  ┣ 📂scripts
  ┃ ┣ 📜ranking_engine.py
  ┃ ┣ 📜check_db.py
- ┃ ┗ 📜screener_preset_test.py
+ ┃ ┣ 📜screener_preset_test.py
+ ┃ ┣ 📜optimize_db.py
+ ┃ ┗ 📜load_test.py
  ┣ 📂notebooks                     
  ┣ 📂docs                          # Analyst guides & Retrospectives
- ┃ ┣ 📜sprint2_retro.md            # Sprint 2 post-mortem analysis
- ┃ ┗ 📜sprint3_retro.md            # Sprint 3 post-mortem analysis
+ ┃ ┣ 📜sprint2_retro.md            
+ ┃ ┣ 📜sprint3_retro.md            
+ ┃ ┣ 📜analyst_guide.pdf
+ ┃ ┗ 📜acceptance_checklist.pdf
  ┣ 📜.env                          
  ┣ 📜Makefile                      
  ┣ 📜requirements.txt              
@@ -293,6 +390,7 @@ The goal of this project is to build an end-to-end Financial Intelligence Platfo
 ---
 
 ## 🛠️ Execution & Setup Guide
+If you are a developer looking to run specific background jobs or generate standalone reports without using the dashboard, follow these direct execution commands:
 
 ### 1. System Deployment & Virtual Environment Setup
 
@@ -323,7 +421,7 @@ python -m src.analytics.ratios
 python -m src.analytics.cagr
 ```
 
-### 5. Run the Analytics Engines & Populate Database (Sprint 2)
+### 5. Run the Analytics Engines & Populate Database
 
 Execute the master population script to run all analytical modules and ingest data into SQLite:
 
@@ -382,7 +480,7 @@ python -m src.reports.radar_charts
 python src/reports/peer_comparison.py  
 ```
 
-### 13. Run Sprint 3 Data Quality (DQ) Tests
+### 13. Run Data Quality (DQ) Tests
 
 ```bash
 python tests/dq/test_dq_sprint3.py

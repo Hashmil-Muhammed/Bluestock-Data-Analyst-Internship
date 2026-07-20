@@ -4,23 +4,23 @@ import sys
 from pathlib import Path
 
 # 1. First: Set up the path
-root_path = Path(__file__).resolve().parents[1] # This points to the 'src' folder
+root_path = Path(__file__).resolve().parents[1]  # This points to the 'src' folder
 sys.path.append(str(root_path))
 
 # 2. Second: Now import from dashboard
-from dashboard.utils.db import load_data
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 # Set page configuration
 st.set_page_config(
     page_title="Nifty 100 Intelligence",
     page_icon="📈",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
-st.markdown("""
+st.markdown(
+    """
     <style>
     /* Hide unnecessary horizontal scrollbar in the sidebar */
     [data-testid="stSidebar"] {
@@ -32,7 +32,9 @@ st.markdown("""
         word-wrap: break-word;
     }
     </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # Sidebar configuration (Logo & Navigation)
 st.sidebar.title("Nifty 100 Intelligence")
@@ -57,7 +59,8 @@ Use the sidebar to Navigate through the different analytical modules:
 """)
 
 # Custom CSS for branding
-st.markdown("""
+st.markdown(
+    """
             <style>
                .stApp {
                    background-color: #f8f9fa;
@@ -66,4 +69,6 @@ st.markdown("""
                    background-color: #ffffff;
                }
             </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
