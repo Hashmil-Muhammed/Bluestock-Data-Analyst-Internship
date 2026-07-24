@@ -20,6 +20,7 @@
 <br>
 </div>
 
+<img width="1536" height="1024" alt="ChatGPT Image Jul 24, 2026, 04_57_34 PM" src="https://github.com/user-attachments/assets/67ec2e95-0202-474e-81ba-f69ce7959ff8" />
 ---
 
 ## 📊 Project Metrics Cards
