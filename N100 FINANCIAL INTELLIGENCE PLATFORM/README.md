@@ -5,6 +5,7 @@
 # FinSight N100 | Nifty 100 Financial Intelligence Platform
 ### Enterprise-Grade Financial Analytics, REST API & Business Intelligence Solution
 
+
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-REST_API-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-green?style=for-the-badge&logo=sqlite&logoColor=white)
@@ -17,7 +18,12 @@
 ![GitHub](https://img.shields.io/badge/GitHub-Portfolio-black?style=for-the-badge&logo=github&logoColor=white)
 
 
+
+
+###  **Live Web Application:** [https://finsight-n100.streamlit.app/](https://finsight-n100.streamlit.app/)
+
 <br>
+
 </div>
 
 <img width="1536" height="1024" alt="ChatGPT Image Jul 24, 2026, 04_57_34 PM" src="https://github.com/user-attachments/assets/67ec2e95-0202-474e-81ba-f69ce7959ff8" />
@@ -43,7 +49,7 @@
 - [🚀 Key Features](#-key-features)
 - [⚙️ Tech Stack](#️-tech-stack)
 - [🏗 System Architecture & Workflow](#-system-architecture--workflow)
-- [🏃‍♂️ Running the Live Platform (API & Dashboard)](#️-running-the-live-platform-api--dashboard)
+- [🌐 Live Deployment & Running Locally](#-live-deployment--running-locally)
 - [📅 Sprint 1 Progress Tracker (Data Foundation)](#-sprint-1-progress-tracker-data-foundation)
 - [📅 Sprint 2 Progress Tracker (Analytics Engine)](#-sprint-2-progress-tracker-analytics-engine)
 - [📅 Sprint 3 Progress Tracker (Screener & Ranking Engine)](#-sprint-3-progress-tracker-screener--ranking-engine)
@@ -77,8 +83,9 @@ The **Nifty 100 Financial Intelligence Platform** is an enterprise-grade, fully 
 6. **Interactive 9-Screen Dashboard & Automated Reports:** Multi-page **Streamlit** frontend interface paired with **ReportLab** dynamic PDF generation for 1-page company executive tearsheets and sector intelligence reports.
 7. **CI/CD Quality Assurance:** Fully audited using a 137-case **Pytest** testing suite (100% green pass rate) and validated through 20 project acceptance gates.
 
-**Project Duration:** 45 Days | 6 Sprints | 12 Modules | 120+ Technical Features  
-**Status:** `Completed - Production Ready v1.0`
+**Project Duration :** 45 Days | 6 Sprints | 12 Modules | 120+ Technical Features  
+**Status :** `Completed - Production Ready v1.0` <br>
+**Live URL :** [https://finsight-n100.streamlit.app/](https://finsight-n100.streamlit.app/)
 
 ---
 
@@ -133,8 +140,13 @@ The **Nifty 100 Financial Intelligence Platform** is an enterprise-grade, fully 
 ```
 ---
 
-## 🏃‍♂️ Running the Live Platform (API & Dashboard)
+## 🌐 Live Deployment & Running Locally
 
+### 🔗 Access Live App
+The interactive 9-page Streamlit Dashboard is publicly hosted and available at:
+👉 https://finsight-n100.streamlit.app/
+
+### 💻 Running the Platform Locally
 This project features a fully interactive 9-screen multi-page Streamlit application powered by a FastAPI backend. You need two terminal windows to run the platform locally.
 
 ### **1. Install Dependencies & Setup Environment**
@@ -782,8 +794,13 @@ Special thanks to the following communities and organizations that contributed d
 - 💻 Specializing in AI, Machine Learning, Data Engineering, Financial Analytics, and Full-Stack Development
 - 🌱 Passionate about building intelligent, scalable, and production-ready software solutions
 
-**GitHub:**  
-https://github.com/Hashmil-Muhammed
+**Live Platform:** 
+https://finsight-n100.streamlit.app/
+
+**GitHub:**  https://github.com/Hashmil-Muhammed
+
+**LinkedIn:**
+ https://www.linkedin.com/in/hashmil-muhammed08/
 
 ---
 
