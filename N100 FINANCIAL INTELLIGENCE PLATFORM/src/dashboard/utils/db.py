@@ -6,7 +6,7 @@ import os
 # FIX 1: Added 'r' before the string to make it a raw string.
 # This prevents \n in \nifty100.db from breaking the path.
 # DB_PATH = r"G:\My Drive\WorkSpace\Bluestock_Fintech_Data_Analyst_Intern\Intership at BlueStock\N100 FINANCIAL INTELLIGENCE PLATFORM\nifty100.db"
-db_path = "nifty100.db"
+DB_PATH = "nifty100.db"
 
 
 @st.cache_data
