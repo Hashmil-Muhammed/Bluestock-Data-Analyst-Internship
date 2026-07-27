@@ -47,10 +47,8 @@
 import sqlite3
 import os
 
-# പ്രൊജക്റ്റ് റൂട്ട് ഫോൾഡർ കണ്ടുപിടിക്കാൻ
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# ഡാറ്റാബേസ് പാത്ത്
 db_path = os.path.join(BASE_DIR, "nifty100.db")
 if not os.path.exists(db_path):
     db_path = os.path.join(BASE_DIR, "data", "nifty100.db")
@@ -61,12 +59,10 @@ try:
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
-    # എല്ലാ ടേബിളുകളുടെയും പേര് എടുക്കാൻ
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     tables = [row[0] for row in cursor.fetchall()]
     print(f"📦 TABLES IN DB: {tables}\n")
 
-    # companies, financial_ratios ടേബിളുകളിലെ കോളങ്ങൾ എടുക്കാൻ
     for table in ["companies", "financial_ratios"]:
         if table in tables:
             cursor.execute(f"PRAGMA table_info({table});")
