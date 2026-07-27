@@ -128,7 +128,7 @@ def render_annual_reports():
         column_config={
             "BSE PDF Link": st.column_config.LinkColumn(
                 "BSE PDF Link",
-                display_text="📄 View PDF",
+                display_text="View PDF",
                 help="Click to open the official BSE annual report document.",
             ),
             "Status": st.column_config.TextColumn(

@@ -11,7 +11,7 @@ from dashboard.utils.db import load_data
 
 def render_valuation_analysis():
     st.set_page_config(page_title="Valuation Analysis", page_icon="📈", layout="wide")
-    st.title("📈 Valuation & Market Data Analysis")
+    st.title("Valuation & Market Data Analysis")
     st.markdown(
         "Analyze historical P/E, P/B, EV/EBITDA trends, and rank companies by FCF & Dividend Yields."
     )
@@ -175,7 +175,7 @@ def render_valuation_analysis():
     # UI FIX: Gracefully handle missing data edge case
     if df_filtered.empty:
         st.warning(
-            "⚠️ No data available for the selected filters. Please try another company or sector."
+            "No data available for the selected filters. Please try another company or sector."
         )
         return
 
@@ -302,7 +302,7 @@ def render_valuation_analysis():
     # STEP 8: TASK 2 - FCF & DIVIDEND YIELD RANKER
     # ==========================================
     st.markdown("---")
-    st.subheader("💰 FCF & Dividend Yield Ranker")
+    st.subheader("FCF & Dividend Yield Ranker")
     st.markdown(
         "Filter companies by Minimum Dividend Yield and rank them based on Free Cash Flow (FCF) Yield to identify value signals."
     )
@@ -416,7 +416,7 @@ def render_valuation_analysis():
         st.dataframe(display_flag_df.round(2), width="stretch", hide_index=True)
 
         # Download Buttons
-        st.markdown("### 📥 Download Reports")
+        st.markdown("### Download Reports")
         col_d1, col_d2 = st.columns(2)
 
         with col_d1:
