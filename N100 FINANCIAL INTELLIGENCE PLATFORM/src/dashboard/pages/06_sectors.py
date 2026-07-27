@@ -61,7 +61,7 @@ def render_sector_analysis():
         for d in [df_sec, df_rat, df_pl, df_mc]:
             if not d.empty and "company_id" in d.columns:
                 d = d.set_index("company_id")
-                df = df.join(d, rsuffix="_dup")
+                df = df.join(d, lsuffix="_left", rsuffix="_right")
         df = df.reset_index()
         df = df.loc[:, ~df.columns.str.endswith("_dup")]
     else:
